@@ -1,15 +1,16 @@
 package com.anaadih.brumstaxi;
 
+import java.sql.Date;
+import java.text.SimpleDateFormat;
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import com.anaadih.brumstaxi.Register.AttemptRegister;
 import com.anaadih.brumstaxi.library.UserFunctions;
-
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -59,13 +60,12 @@ public class Quote extends Activity {
 			
 			qtPickingupValue.setText(from);
 			qtDropOffValue.setText(to);
-			qtDateTimeValue.setText(time);
+			qtDateTimeValue.setText(getDate(time));
 			qtPassengerValue.setText(passenger);
 			qtLuggageValue.setText(luggage);
 			
-			//new FetchQuoteData().execute();
+			new FetchQuoteData().execute();
 		} catch (JSONException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -153,5 +153,13 @@ public class Quote extends Activity {
         = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
 	    NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
 	    return activeNetworkInfo != null && activeNetworkInfo.isConnected();
+	}
+	
+	private String getDate(String timeStampStr){
+
+		long dv = Long.valueOf(timeStampStr)*1000;// its need to be in milisecond
+		java.util.Date df = new java.util.Date(dv);
+		String vv = new SimpleDateFormat("MMMM dd, hh:mm a").format(df);
+		return vv;
 	}
 }
