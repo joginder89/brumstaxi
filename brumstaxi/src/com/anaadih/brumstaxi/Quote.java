@@ -17,13 +17,20 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.util.Log;
+import android.widget.NumberPicker;
 import android.widget.TextView;
 import android.widget.Toast;
 
 public class Quote extends Activity {
 
-	  	TextView myid;
-	  	String rowid;
+		TextView myid;
+		TextView pickUpFrom;
+		TextView dropOffTo;
+		TextView bookTaxiDate;
+		TextView bookTaxiTime;
+		NumberPicker bookTaxiPassengers;
+		NumberPicker bookTaxiLuggage;
+	  	String user_request_id;
 	  	private ProgressDialog pDialog;
 	  	private static String KEY_SUCCESS = "success";
 		private static String KEY_ERROR = "error";
@@ -42,7 +49,21 @@ public class Quote extends Activity {
 		
 		try {
 			json = new JSONObject(mydata);
-			rowid = json.getString("rowid");
+			user_request_id = json.getString("user_request_id");
+			String from = json.getString("from");
+			String to = json.getString("to");
+			String time = json.getString("time");
+			String passenger = json.getString("passenger");
+			String luggage = json.getString("luggage");
+			
+			
+			pickUpFrom.setText(from);
+			dropOffTo.setText(to);
+			bookTaxiDate.setText(time);
+			bookTaxiTime.setText(time);
+			bookTaxiPassengers.setTag(passenger);
+			bookTaxiLuggage.setTag(luggage);
+			
 			//myid.setText(rowid);
 			new FetchQuoteData().execute();
 		} catch (JSONException e) {
@@ -84,7 +105,7 @@ public class Quote extends Activity {
 	    	}
 	    	
 			UserFunctions userFunction = new UserFunctions();
-			JSONObject json = userFunction.fetchQuoteData(rowid);
+			JSONObject json = userFunction.fetchQuoteData(user_request_id);
 			Log.d("JSON Received on Quote Page=>", json.toString());
 			// check for login response
 			try {
