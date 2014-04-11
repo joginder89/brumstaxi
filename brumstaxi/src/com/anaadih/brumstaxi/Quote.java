@@ -22,11 +22,14 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 public class Quote extends Activity {
-
 		
+		int user_request_id;
 		TextView qtPickingupValue;
+		TextView qtDropOffValue;
+		TextView qtDateTimeValue;
+		TextView qtPassengerValue;
+		TextView qtLuggageValue;
 		
-	  	int user_request_id;
 	  	private ProgressDialog pDialog;
 	  	private static String KEY_SUCCESS = "success";
 		private static String KEY_ERROR = "error";
@@ -46,33 +49,33 @@ public class Quote extends Activity {
 		
 		try {
 			json = new JSONObject(mydata);
-			//user_request_id = json.getInt("user_request_id");
-			Log.d("QuoteFile==>","Before");
-			String from = json.getString("from");
-			Log.d("from==>",from);
-			/*String to = json.getString("to");
-			String time = json.getString("time");*/
-			/*String passenger = json.getString("passenger");
-			String luggage = json.getString("luggage");*/
+			user_request_id = json.getInt("user_request_id");
 			
+			String from = json.getString("from");
+			String to = json.getString("to");
+			String time = json.getString("time");
+			String passenger = json.getString("passenger");
+			String luggage = json.getString("luggage");
 			
 			qtPickingupValue.setText(from);
-			/*dropOffTo.setText(to);
-			bookTaxiDate.setText(time);
-			bookTaxiTime.setText(time);
-			/*bookTaxiPassengers.setTag(passenger);
-			bookTaxiLuggage.setTag(luggage);*/
+			qtDropOffValue.setText(to);
+			qtDateTimeValue.setText(time);
+			qtPassengerValue.setText(passenger);
+			qtLuggageValue.setText(luggage);
 			
-			//myid.setText(rowid);
 			//new FetchQuoteData().execute();
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
 	}
 	public void Initializer() {
+		
 		qtPickingupValue=(TextView)findViewById(R.id.qtPickingupValue);
+		qtDropOffValue=(TextView)findViewById(R.id.qtDropOffValue);
+		qtDateTimeValue=(TextView)findViewById(R.id.qtDateTimeValue);
+		qtPassengerValue=(TextView)findViewById(R.id.qtPassengerValue);
+		qtLuggageValue=(TextView)findViewById(R.id.qtLuggageValue);
 	}
 	
 	class FetchQuoteData extends AsyncTask<String, String, String> {
