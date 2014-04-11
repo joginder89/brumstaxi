@@ -1,0 +1,90 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context=".MainActivity" >
+
+    <LinearLayout
+        android:id="@+id/contentBody"
+        android:layout_width="fill_parent"
+        android:layout_height="match_parent"
+        android:layout_centerHorizontal="true"
+        android:padding="25dp"
+        android:orientation="vertical" >
+        
+        <TextView
+	        android:id="@+id/tvNeedTaxi"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_gravity="center_horizontal"
+	        android:textSize="40sp"
+	        android:text="@string/need_taxi" />
+        
+        <TextView
+            android:id="@+id/tvTiredOfWaiting"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:textSize="20sp"
+            android:text="@string/tired_of_waiting"
+            android:textColor="@color/whiteColor" />
+        
+        <Button
+            android:id="@+id/Logo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="15dp"
+            android:contentDescription="@string/logodesc"
+            android:background="@drawable/logo" />
+        
+        <Button
+            android:id="@+id/LoginButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="15dp"
+            android:background="@drawable/login" />
+        
+        <Button
+            android:id="@+id/registrationButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="15dp"
+            android:background="@drawable/registration" />
+
+        <Button
+            android:id="@+id/bookATaxiButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="15dp"
+            
+            android:background="@drawable/book_a_taxi" />
+        
+        <Button
+            android:id="@+id/myJourneysButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="15dp"
+            
+            android:background="@drawable/my_journeys" />
+        
+        <Button
+            android:id="@+id/futureJourneyButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            
+            android:layout_marginBottom="15dp"
+            android:background="@drawable/future_journey" />
+       
+
+    </LinearLayout>
+    
+    <Button
+        android:id="@+id/callUsButton"
+        android:layout_width="match_parent"
+        android:layout_height="61dp"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/call_us" />
+
+</RelativeLayout>
