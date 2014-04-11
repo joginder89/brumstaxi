@@ -23,14 +23,10 @@ import android.widget.Toast;
 
 public class Quote extends Activity {
 
-		TextView myid;
-		TextView pickUpFrom;
-		TextView dropOffTo;
-		TextView bookTaxiDate;
-		TextView bookTaxiTime;
-		NumberPicker bookTaxiPassengers;
-		NumberPicker bookTaxiLuggage;
-	  	String user_request_id;
+		
+		TextView qtPickingupValue;
+		
+	  	int user_request_id;
 	  	private ProgressDialog pDialog;
 	  	private static String KEY_SUCCESS = "success";
 		private static String KEY_ERROR = "error";
@@ -39,7 +35,8 @@ public class Quote extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.quotes);
-		myid = (TextView) findViewById(R.id.myid);
+		Initializer();
+		
 		String message = getIntent().getExtras().getString("message");
 		String mydata = getIntent().getExtras().getString("mydata");
 		
@@ -49,28 +46,33 @@ public class Quote extends Activity {
 		
 		try {
 			json = new JSONObject(mydata);
-			user_request_id = json.getString("user_request_id");
+			//user_request_id = json.getInt("user_request_id");
+			Log.d("QuoteFile==>","Before");
 			String from = json.getString("from");
-			String to = json.getString("to");
-			String time = json.getString("time");
-			String passenger = json.getString("passenger");
-			String luggage = json.getString("luggage");
+			Log.d("from==>",from);
+			/*String to = json.getString("to");
+			String time = json.getString("time");*/
+			/*String passenger = json.getString("passenger");
+			String luggage = json.getString("luggage");*/
 			
 			
-			pickUpFrom.setText(from);
-			dropOffTo.setText(to);
+			qtPickingupValue.setText(from);
+			/*dropOffTo.setText(to);
 			bookTaxiDate.setText(time);
 			bookTaxiTime.setText(time);
-			bookTaxiPassengers.setTag(passenger);
-			bookTaxiLuggage.setTag(luggage);
+			/*bookTaxiPassengers.setTag(passenger);
+			bookTaxiLuggage.setTag(luggage);*/
 			
 			//myid.setText(rowid);
-			new FetchQuoteData().execute();
+			//new FetchQuoteData().execute();
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
+	}
+	public void Initializer() {
+		qtPickingupValue=(TextView)findViewById(R.id.qtPickingupValue);
 	}
 	
 	class FetchQuoteData extends AsyncTask<String, String, String> {
@@ -105,14 +107,14 @@ public class Quote extends Activity {
 	    	}
 	    	
 			UserFunctions userFunction = new UserFunctions();
-			JSONObject json = userFunction.fetchQuoteData(user_request_id);
+			JSONObject json = userFunction.fetchQuoteData(String.valueOf(user_request_id));
 			Log.d("JSON Received on Quote Page=>", json.toString());
 			// check for login response
 			try {
 				if(json.getString(KEY_SUCCESS) != null) {
 					String res = json.getString(KEY_SUCCESS); 
 					if(Integer.parseInt(res) == 1) {
-						myid.setText(json.toString());
+						
 					} else {
 						pDialog.dismiss();
 						Log.d("KEY_ERROR",json.getString(KEY_ERROR));
