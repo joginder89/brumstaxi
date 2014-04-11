@@ -89,7 +89,7 @@ public class GcmIntentService extends IntentService {
         .setContentTitle("Brums Taxi Notification")
         .setStyle(new NotificationCompat.BigTextStyle()
         .bigText(msg))
-        .setContentText("You get a new Quote");
+        .setContentText("Cab company has provided the details. Please check");
 
         mBuilder.setContentIntent(contentIntent);
         mNotificationManager.notify(NOTIFICATION_ID, mBuilder.build());

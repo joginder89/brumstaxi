@@ -20,6 +20,7 @@ public class UserFunctions {
 	//String URL = "http://10.0.2.2/gcmtest/index.php";
 	private static String loginURL = "http://hrm.testserver87.com/brumstaxi/index.php";
 	private static String getQuoteURL = "http://hrm.testserver87.com/brumstaxi/getquote.php";
+	private static String fetchQuoteDataURL = "http://hrm.testserver87.com/brumstaxi/fetchquotedata.php";
 	
 	private static String login_tag = "login";
 	private static String register_tag = "register";
@@ -88,6 +89,18 @@ public class UserFunctions {
 		// getting JSON Object
 		
 		JSONObject json = jsonParser.getJSONFromUrl(getQuoteURL, params);
+		return json;
+	}
+	
+	public JSONObject fetchQuoteData(String rowid){
+		// Building Parameters
+		//JSONObject json =null;
+		
+		List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
+		
+        nameValuePairs.add(new BasicNameValuePair("rowid", rowid));  
+		JSONObject json = jsonParser.getJSONFromUrl(fetchQuoteDataURL, nameValuePairs);
+		Log.d("fetchQuoteDataJSON=>", json.toString());
 		return json;
 	}
 	

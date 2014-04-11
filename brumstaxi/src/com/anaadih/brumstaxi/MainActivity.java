@@ -148,6 +148,9 @@ public class MainActivity extends Activity implements View.OnClickListener {
 				case R.id.LoginButton:
 					goToLoginPage();
 					break;
+				case R.id.myJourneysButton:
+					goToMyJourneyPage();
+					break;
 				case R.id.futureJourneyButton:
 					goToFutureJourneyPage();
 					break;
@@ -170,8 +173,13 @@ public class MainActivity extends Activity implements View.OnClickListener {
          startActivity(intent);
 	}
     
+    public void goToMyJourneyPage() {
+    	Intent intent = new Intent(this,RegistrationResponse.class);
+         startActivity(intent);
+	}
+    
     public void goToFutureJourneyPage() {
-    	Intent intent = new Intent(this,Quote.class);
+    	Intent intent = new Intent(this,BookTaxiResponse.class);
          startActivity(intent);
 	}
     

@@ -33,6 +33,7 @@
     <string name="comments">Comments</string>
     <string name="thanksMsg">Thanks for Choosing Brumstaxi</string>
     <string name="bookTaxiResp">Your information has been received. You will get the Quotation shortly.</string>
+    <string name="regResponse">Thank you for Registring with the BrumsTaxi.</string>
     
     <!-- BookATaxi Page -->
     <string name="qt_pick_up">Picking Up:</string>
