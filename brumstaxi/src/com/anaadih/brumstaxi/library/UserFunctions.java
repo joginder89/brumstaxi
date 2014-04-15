@@ -7,10 +7,7 @@ import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONObject;
 
-import android.app.Activity;
 import android.content.Context;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
 import android.util.Log;
 
 public class UserFunctions {
@@ -92,13 +89,13 @@ public class UserFunctions {
 		return json;
 	}
 	
-	public JSONObject fetchQuoteData(String rowid){
+	public JSONObject fetchQuoteData(String userRequestId){
 		// Building Parameters
 		//JSONObject json =null;
 		
 		List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
 		
-        nameValuePairs.add(new BasicNameValuePair("rowid", rowid));  
+        nameValuePairs.add(new BasicNameValuePair("userRequestId", userRequestId));  
 		JSONObject json = jsonParser.getJSONFromUrl(fetchQuoteDataURL, nameValuePairs);
 		Log.d("fetchQuoteDataJSON=>", json.toString());
 		return json;

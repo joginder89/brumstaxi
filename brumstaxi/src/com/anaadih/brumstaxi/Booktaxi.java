@@ -187,8 +187,9 @@ public class Booktaxi extends Activity implements View.OnClickListener {
 			final Calendar calendar = Calendar.getInstance();
 			calendar.set(year,month,day,hour,minute,second);
 			long startTime = calendar.getTimeInMillis()/1000;
-			
-			String userId="11";
+			sharedpreferences=getSharedPreferences(MyPREFERENCES, 
+  			      Context.MODE_PRIVATE);
+			String userId=sharedpreferences.getString("userId", "");
 			String pickUpFromValue=pickUpFrom.getText().toString();
 			String dropOffToValue=dropOffTo.getText().toString();
 			String bookTaxiCommentValue=bookTaxiComment.getText().toString();

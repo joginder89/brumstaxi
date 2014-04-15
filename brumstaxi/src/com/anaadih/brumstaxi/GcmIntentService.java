@@ -48,14 +48,14 @@ public class GcmIntentService extends IntentService {
             } else if (GoogleCloudMessaging.
                     MESSAGE_TYPE_MESSAGE.equals(messageType)) {
                 // This loop represents the service doing some work.
-                /*for (int i=0; i<5; i++) {
+                for (int i=0; i<1; i++) {
                     Log.i(TAG, "Working... " + (i+1)
                             + "/5 @ " + SystemClock.elapsedRealtime());
                     try {
-                        Thread.sleep(5000);
+                        Thread.sleep(50);
                     } catch (InterruptedException e) {
                     }
-                }*/
+                }
                 Log.i(TAG, "Completed work @ " + SystemClock.elapsedRealtime());
                 // Post notification of received message.
                 sendNotification(extras.toString(),extras.getString("mydata"));
@@ -77,7 +77,7 @@ public class GcmIntentService extends IntentService {
         myintent.putExtra("message", msg);
         myintent.putExtra("mydata", mydata);
         
- /*       PendingIntent contentIntent = PendingIntent.getActivity(this, 0,
+/*      PendingIntent contentIntent = PendingIntent.getActivity(this, 0,
                 new Intent(this, myintent), 0);*/
         
         PendingIntent contentIntent = PendingIntent.getActivity(this, 0,

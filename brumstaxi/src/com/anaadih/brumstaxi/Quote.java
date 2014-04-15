@@ -1,10 +1,8 @@
 package com.anaadih.brumstaxi;
 
-import java.sql.Date;
 import java.text.SimpleDateFormat;
 import org.json.JSONException;
 import org.json.JSONObject;
-import com.anaadih.brumstaxi.Register.AttemptRegister;
 import com.anaadih.brumstaxi.library.UserFunctions;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -14,22 +12,22 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.Intent;
-import android.content.SharedPreferences;
-import android.content.SharedPreferences.Editor;
 import android.util.Log;
-import android.widget.NumberPicker;
+import android.view.ViewGroup.LayoutParams;
+import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 public class Quote extends Activity {
 		
-		int user_request_id;
+		int user_request_id,i;
 		TextView qtPickingupValue;
 		TextView qtDropOffValue;
 		TextView qtDateTimeValue;
 		TextView qtPassengerValue;
 		TextView qtLuggageValue;
+		LinearLayout parentLayout;
 		
 	  	private ProgressDialog pDialog;
 	  	private static String KEY_SUCCESS = "success";
@@ -44,8 +42,8 @@ public class Quote extends Activity {
 		String message = getIntent().getExtras().getString("message");
 		String mydata = getIntent().getExtras().getString("mydata");
 		
-		Toast.makeText(getApplicationContext(),message,Toast.LENGTH_LONG).show();
-		Toast.makeText(getApplicationContext(),mydata,Toast.LENGTH_LONG).show();
+		//Toast.makeText(getApplicationContext(),message,Toast.LENGTH_LONG).show();
+		//Toast.makeText(getApplicationContext(),mydata,Toast.LENGTH_LONG).show();
 		Log.d("ReceivedAtQuoteFile==>",message);
 		
 		try {
@@ -76,6 +74,11 @@ public class Quote extends Activity {
 		qtDateTimeValue=(TextView)findViewById(R.id.qtDateTimeValue);
 		qtPassengerValue=(TextView)findViewById(R.id.qtPassengerValue);
 		qtLuggageValue=(TextView)findViewById(R.id.qtLuggageValue);
+		
+		// Parent layout
+        parentLayout = (LinearLayout)findViewById(R.id.companyQuoteBody);
+        
+        
 	}
 	
 	class FetchQuoteData extends AsyncTask<String, String, String> {
@@ -112,12 +115,53 @@ public class Quote extends Activity {
 			UserFunctions userFunction = new UserFunctions();
 			JSONObject json = userFunction.fetchQuoteData(String.valueOf(user_request_id));
 			Log.d("JSON Received on Quote Page=>", json.toString());
+			
 			// check for login response
 			try {
 				if(json.getString(KEY_SUCCESS) != null) {
+					Log.d("KEY_SUCCESS=>", json.getString(KEY_SUCCESS));
 					String res = json.getString(KEY_SUCCESS); 
 					if(Integer.parseInt(res) == 1) {
-						
+						Log.d("KEY_SUCCESS 2 =>", res);
+						/*	
+						LinearLayout childLinearLayout = new LinearLayout(getApplicationContext());
+				        childLinearLayout.setOrientation(LinearLayout.HORIZONTAL);
+				        childLinearLayout.setPadding(0, 5, 0, 5);
+				        childLinearLayout.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
+				        childLinearLayout.setBackgroundResource(R.color.mainColor);
+				        childLinearLayout.setBaselineAligned(false);
+				        childLinearLayout.setWeightSum(100);
+				        parentLayout.addView(childLinearLayout);
+				        
+				        TextView companyName= new TextView(getApplicationContext());
+				        LinearLayout.LayoutParams param1 = new LinearLayout.LayoutParams(
+				                0,LayoutParams.MATCH_PARENT, 50);
+				        companyName.setLayoutParams(param1);
+				        companyName.setTextSize(20);
+				        companyName.setPadding(5, 5, 0, 0);
+				        companyName.setTextColor(getResources().getColor(R.color.whiteColor));
+				        companyName.setText("My company Name");
+				        childLinearLayout.addView(companyName);
+				        
+				        TextView companyFare= new TextView(getApplicationContext());
+				        LinearLayout.LayoutParams param2 = new LinearLayout.LayoutParams(
+				                0,LayoutParams.MATCH_PARENT, 20);
+				        companyFare.setLayoutParams(param2);
+				        companyFare.setPadding(0, 5, 0, 0);
+				        companyFare.setTextColor(getResources().getColor(R.color.whiteColor));
+				        companyFare.setTextSize(20);
+				        companyFare.setText("11.40");
+				        childLinearLayout.addView(companyFare);
+				        
+				        Button acceptBtn = new Button(getApplicationContext());
+				        acceptBtn.setLayoutParams(new LayoutParams(0, 50));
+				        LinearLayout.LayoutParams param3 = new LinearLayout.LayoutParams(
+				                0,LayoutParams.MATCH_PARENT, 30);
+				        acceptBtn.setLayoutParams(param3);
+				        companyFare.setPadding(0, 0, 0, 5);
+				        acceptBtn.setBackgroundResource(R.drawable.a15);
+				        childLinearLayout.addView(acceptBtn);
+						*/
 					} else {
 						pDialog.dismiss();
 						Log.d("KEY_ERROR",json.getString(KEY_ERROR));
@@ -136,6 +180,12 @@ public class Quote extends Activity {
 				Toast.makeText(getApplicationContext(),"Please try Again",
 					   Toast.LENGTH_LONG).show();
 				e.printStackTrace();
+			} catch (Exception e) {
+				e.printStackTrace();
+				pDialog.dismiss();
+				Log.e("Exception=>","There is Exception");
+				Toast.makeText(getApplicationContext(),"Please try Again",
+					   Toast.LENGTH_LONG).show();
 			}
 			return null;
 		}
@@ -155,6 +205,7 @@ public class Quote extends Activity {
 	    return activeNetworkInfo != null && activeNetworkInfo.isConnected();
 	}
 	
+	@SuppressLint("SimpleDateFormat")
 	private String getDate(String timeStampStr){
 
 		long dv = Long.valueOf(timeStampStr)*1000;// its need to be in milisecond

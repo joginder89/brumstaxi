@@ -4,4 +4,6 @@
     <color name="blackColor">#000000</color>
     <color name="regTextField">#557699</color>
     <color name="mainColor">#006cb5</color>
+    <color name="yellowColor">#d0bb50</color>
+    
 </resources>

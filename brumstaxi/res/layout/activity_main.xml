@@ -12,71 +12,84 @@
         android:layout_height="match_parent"
         android:layout_centerHorizontal="true"
         android:padding="25dp"
+        android:weightSum="100"
         android:orientation="vertical" >
         
         <TextView
 	        android:id="@+id/tvNeedTaxi"
 	        android:layout_width="wrap_content"
-	        android:layout_height="wrap_content"
+	        android:layout_height="0dp"
+	        android:layout_weight="7"
+	        android:textColor="@color/yellowColor"
 	        android:layout_gravity="center_horizontal"
-	        android:textSize="40sp"
+	        android:textSize="@dimen/needTaxiSize"
 	        android:text="@string/need_taxi" />
         
         <TextView
             android:id="@+id/tvTiredOfWaiting"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="10"
+            android:textSize="@dimen/tiredOfWaitingSize"
             android:layout_gravity="center_horizontal"
-            android:textSize="20sp"
             android:text="@string/tired_of_waiting"
             android:textColor="@color/whiteColor" />
         
         <Button
             android:id="@+id/Logo"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="15dp"
+            android:layout_height="0dp"
+            android:layout_weight="13"
             android:contentDescription="@string/logodesc"
             android:background="@drawable/logo" />
+       
+       <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="3"
+            android:layout_gravity="center_horizontal" />
+        
         
         <Button
+            android:id="@+id/bookATaxiButton"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="10"
+            android:background="@drawable/book_a_taxi" />
+        
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="3"
+            android:layout_gravity="center_horizontal" />
+        
+        <Button
+            android:id="@+id/myJourneysButton"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="10"
+            
+            android:background="@drawable/my_journeys" />
+        
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="3"
+            android:layout_gravity="center_horizontal" />
+       
+       <Button
             android:id="@+id/LoginButton"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="15dp"
+            android:layout_height="0dp"
+            android:layout_weight="10"
             android:background="@drawable/login" />
         
         <Button
             android:id="@+id/registrationButton"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="15dp"
+            android:layout_height="0dp"
+            android:layout_weight="10"
             android:background="@drawable/registration" />
-
-        <Button
-            android:id="@+id/bookATaxiButton"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="15dp"
-            
-            android:background="@drawable/book_a_taxi" />
-        
-        <Button
-            android:id="@+id/myJourneysButton"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="15dp"
-            
-            android:background="@drawable/my_journeys" />
-        
-        <Button
-            android:id="@+id/futureJourneyButton"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            
-            android:layout_marginBottom="15dp"
-            android:background="@drawable/future_journey" />
-       
 
     </LinearLayout>
     

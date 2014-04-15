@@ -19,15 +19,21 @@ import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.google.android.gms.gcm.GoogleCloudMessaging;
 
+import android.media.MediaPlayer;
+import android.media.SoundPool;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager.NameNotFoundException;
-import android.graphics.Color;
+import android.content.res.AssetFileDescriptor;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
@@ -59,30 +65,33 @@ public class MainActivity extends Activity implements View.OnClickListener {
      * Substitute you own URL SERVER. In your server you can save the register id to
      * send notification via GCM
      */
-    	//String URL = "http://android.bhaiwah.com/saveid.php";
+    	String URL = "http://hrm.testserver87.com/brumstaxi/savedevice.php";
     	
-    	String URL = "http://10.0.2.2/gcmtest/saveid.php";
+    	//String URL = "http://10.0.2.2/gcmtest/saveid.php";
     
     /**
      * Tag used on log messages.
      */
     static final String TAG = "BrumsTaxi";
 
-    TextView mDisplay;
+    TextView mDisplay,tvTiredOfWaiting;
     GoogleCloudMessaging gcm;
     AtomicInteger msgId = new AtomicInteger();
     SharedPreferences prefs;
     Context context;
     String regid;
+    SoundPool sp;
+    int explosion=0;
+    MediaPlayer player;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.activity_main);
        
         mDisplay = (TextView) findViewById(R.id.tvNeedTaxi);
-        mDisplay.setTextColor(Color.YELLOW);
+        //mDisplay.setTextColor(Color.YELLOW);
         context = getApplicationContext();
+        
 
         // Check device for Play Services APK. If check succeeds, proceed with
         //  GCM registration.
@@ -104,18 +113,18 @@ public class MainActivity extends Activity implements View.OnClickListener {
             LoginButton.setOnClickListener(this);
             bookATaxiButton.setOnClickListener(this);
             myJourneysButton.setOnClickListener(this);
-            futureJourneyButton.setOnClickListener(this);
+            /*futureJourneyButton.setOnClickListener(this);*/
             callUsButton.setOnClickListener(this);
     		
     		if(refUserId != "") {
-    			//registrationButton.setVisibility(View.INVISIBLE);
-    			//LoginButton.setVisibility(View.VISIBLE);
     			contentBody.removeView(registrationButton);	
     		}
     		else {
     			contentBody.removeView(LoginButton);
     		}
-            
+    		
+    		playAudio();
+    		
         } else {
             Log.i(TAG, "No valid Google Play Services APK found.");
         }
@@ -128,8 +137,28 @@ public class MainActivity extends Activity implements View.OnClickListener {
     	LoginButton = (Button)findViewById(R.id.LoginButton);
     	bookATaxiButton = (Button)findViewById(R.id.bookATaxiButton);
     	myJourneysButton = (Button)findViewById(R.id.myJourneysButton);
-    	futureJourneyButton = (Button)findViewById(R.id.futureJourneyButton);
+    	/*futureJourneyButton = (Button)findViewById(R.id.futureJourneyButton);*/
     	callUsButton = (Button)findViewById(R.id.callUsButton);
+    	tvTiredOfWaiting = (TextView)findViewById(R.id.tvTiredOfWaiting);
+    	
+    	/*mDisplay.setTextSize(16 * getResources().getDisplayMetrics().density);
+    	tvTiredOfWaiting.setTextSize(7 * getResources().getDisplayMetrics().density);*/
+    	
+    	if(!isNetworkAvailable()) {
+        	Toast.makeText(MainActivity.this, "Not Connected to Internet !!!", Toast.LENGTH_LONG).show();   
+            
+            AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+            builder.setTitle("Attention!");
+            builder.setMessage("Connection to Server failed.");
+            builder.setPositiveButton("Exit", new DialogInterface.OnClickListener() {
+
+            public void onClick(DialogInterface dialog, int which) {
+                finish();
+            }
+            });
+            AlertDialog dialog = builder.create();
+            dialog.show();	
+        }
 	}
     
     @Override
@@ -151,9 +180,9 @@ public class MainActivity extends Activity implements View.OnClickListener {
 				case R.id.myJourneysButton:
 					goToMyJourneyPage();
 					break;
-				case R.id.futureJourneyButton:
+				/*case R.id.futureJourneyButton:
 					goToFutureJourneyPage();
-					break;
+					break;*/
 			}
 		}
 		else {
@@ -171,17 +200,19 @@ public class MainActivity extends Activity implements View.OnClickListener {
     public void goToLoginPage() {
     	Intent intent = new Intent(MainActivity.this,Login.class);
          startActivity(intent);
+         
+         
 	}
     
     public void goToMyJourneyPage() {
-    	Intent intent = new Intent(this,RegistrationResponse.class);
-         startActivity(intent);
+    	/*Intent intent = new Intent(this,RegistrationResponse.class);
+         startActivity(intent);*/
 	}
     
-    public void goToFutureJourneyPage() {
-    	Intent intent = new Intent(this,BookTaxiResponse.class);
+   /* public void goToFutureJourneyPage() {
+    	Intent intent = new Intent(this,Quote.class);
          startActivity(intent);
-	}
+	}*/
     
     private String getRegistrationId(Context context) {
         final SharedPreferences prefs = getGCMPreferences(context);
@@ -216,6 +247,24 @@ public class MainActivity extends Activity implements View.OnClickListener {
 	    checkPlayServices();
 	}
 	
+	@Override
+	protected void onStop() {
+		super.onStop();
+	}
+	
+	@Override
+	protected void onDestroy() {
+		super.onDestroy();
+		finish();
+	}
+	
+	@Override
+	protected void onRestart() {
+		super.onRestart();
+		checkPlayServices();
+	}
+	
+	
 	/**
 	 * Check the device to make sure it has the Google Play Services APK. If
 	 * it doesn't, display a dialog that allows users to download the APK from
@@ -242,6 +291,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
 	    	@Override
 	        protected String doInBackground(String... params) {
 	            String msg = "";
+	            
 	            try {
 	                if (gcm == null) {
 	                    gcm = GoogleCloudMessaging.getInstance(context);
@@ -257,6 +307,33 @@ public class MainActivity extends Activity implements View.OnClickListener {
 	                // Require the user to click a button again, or perform
 	                // exponential back-off.
 	            }
+	            return msg;
+	        }
+
+	        @Override
+	        protected void onPostExecute(String msg) {
+	            //mDisplay.append(msg + "\n");
+	        }
+	    }.execute(null, null, null);
+	    
+	}
+	
+	private void playAudio() {
+	    new AsyncTask<String, String, String>() {
+
+	    	@Override
+	        protected String doInBackground(String... params) {
+	            String msg = "";
+	            AssetFileDescriptor afd;
+	    		try {
+	    			afd = getAssets().openFd("brumstaxi.wav");
+		    		player = new MediaPlayer();
+		    		player.setDataSource(afd.getFileDescriptor(), afd.getStartOffset(),afd.getLength());
+		    		player.prepare();
+		    		player.start();
+	    		} catch (IOException e) {
+	    			e.printStackTrace();
+	    		}
 	            return msg;
 	        }
 
@@ -347,5 +424,11 @@ public class MainActivity extends Activity implements View.OnClickListener {
 	        // TODO Auto-generated catch block
 	    }
 		
+	}
+	public boolean isNetworkAvailable() {
+	    ConnectivityManager connectivityManager 
+        = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+	    NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+	    return activeNetworkInfo != null && activeNetworkInfo.isConnected();
 	}
 }

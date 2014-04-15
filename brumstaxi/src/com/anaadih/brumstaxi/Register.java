@@ -7,8 +7,10 @@ import com.anaadih.brumstaxi.library.UserFunctions;
 import com.andreabaccega.widget.FormEditText;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
@@ -119,11 +121,26 @@ public class Register extends Activity implements View.OnClickListener {
 	    	}
 			
 	    	if(registrationId == "") {
-	    		cancel(true);
-	    		pDialog.dismiss();
-				Log.e("DeviceKey","Device Not Registered");
-				Toast.makeText(getApplicationContext(),"Service Not Available",
-							   Toast.LENGTH_LONG).show();
+	    		try {
+		    		pDialog.dismiss();
+					Log.e("DeviceKey","Device Not Registered");
+					Toast.makeText(getApplicationContext(),"Service Not Available",
+								   Toast.LENGTH_LONG).show();
+					AlertDialog.Builder builder = new AlertDialog.Builder(Register.this);
+		            builder.setTitle("Attention!");
+		            builder.setMessage("Connection to Server failed.");
+		            builder.setPositiveButton("Exit", new DialogInterface.OnClickListener() {
+	
+		            public void onClick(DialogInterface dialog, int which) {
+		                finish();
+		            }
+		            });
+		            AlertDialog dialog = builder.create();
+		            dialog.show();
+		            cancel(true);
+	    		} catch(Exception e) {
+	    			e.printStackTrace();
+	    		}
 	    	}
 	    	
 			String name=regYourName.getText().toString();
@@ -149,6 +166,9 @@ public class Register extends Activity implements View.OnClickListener {
 						      String userId = json.getString("userId");
 						      editor.putString("userId", userId);
 						      editor.commit();
+						      
+						      Intent intent = new Intent(Register.this,RegistrationResponse.class);
+						         startActivity(intent);
 						      
 						      if(sharedpreferences.contains("userId")) {
 					    			//button.setVisibility(View.VISIBLE);

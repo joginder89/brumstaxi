@@ -1,0 +1,4 @@
+<resources>
+    <dimen name="needTaxiSize">56sp</dimen>
+    <dimen name="tiredOfWaitingSize">32sp</dimen>
+</resources>

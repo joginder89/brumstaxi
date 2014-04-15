@@ -5,7 +5,7 @@
     <string name="app_name">BrumsTaxi</string>
     <string name="action_settings">Settings</string>
     <string name="hello_world">Hello world!</string>
-    <string name="need_taxi">Need a taxi in a jiffy?</string>
+    <string name="need_taxi">need a taxi in a jiffy?</string>
     <string name="tired_of_waiting">Tired of waiting for your taxi? not anymore</string>
     <string name="logodesc">BrumsTaxi</string>
     <string name="driving_you_in">Driving you in and around birmingham safely</string>
