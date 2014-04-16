@@ -1,9 +1,13 @@
 package com.anaadih.brumstaxi;
 
 import java.text.SimpleDateFormat;
+
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
 import com.anaadih.brumstaxi.library.UserFunctions;
+
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
@@ -22,6 +26,7 @@ import android.widget.Toast;
 public class Quote extends Activity {
 		
 		int user_request_id,i;
+		 JSONArray quotesJsonArray;
 		TextView qtPickingupValue;
 		TextView qtDropOffValue;
 		TextView qtDateTimeValue;
@@ -30,8 +35,6 @@ public class Quote extends Activity {
 		LinearLayout parentLayout;
 		
 	  	private ProgressDialog pDialog;
-	  	private static String KEY_SUCCESS = "success";
-		private static String KEY_ERROR = "error";
 	    JSONObject json;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -87,6 +90,7 @@ public class Quote extends Activity {
 		 * Before starting background thread Show Progress Dialog
 		 * */
 		boolean failure = false;
+		JSONObject jsonResult;
 
 		@Override
 		protected void onPreExecute() {
@@ -100,7 +104,6 @@ public class Quote extends Activity {
 
 		@Override
 		protected String doInBackground(String... args) {
-			// TODO Auto-generated method stub
 			// Check for success tag
 			Log.d("I am in ", "doInBackground Function");
 			
@@ -113,21 +116,34 @@ public class Quote extends Activity {
 	    	}
 	    	
 			UserFunctions userFunction = new UserFunctions();
-			JSONObject json = userFunction.fetchQuoteData(String.valueOf(user_request_id));
-			Log.d("JSON Received on Quote Page=>", json.toString());
+			jsonResult = userFunction.fetchQuoteData(String.valueOf(user_request_id));
 			
-			// check for login response
-			try {
-				if(json.getString(KEY_SUCCESS) != null) {
-					Log.d("KEY_SUCCESS=>", json.getString(KEY_SUCCESS));
-					String res = json.getString(KEY_SUCCESS); 
-					if(Integer.parseInt(res) == 1) {
-						Log.d("KEY_SUCCESS 2 =>", res);
-						/*	
+			Log.d("JSON Received on Quote Page=>", jsonResult.toString());
+			return null;
+		}
+		/**
+		 * After completing background task Dismiss the progress dialog
+		 * **/
+		protected void onPostExecute(String file_url) {
+			// dismiss the dialog once product deleted
+			pDialog.dismiss();
+			try {  /*  quotesJsonArray.getJSONObject(0).getString("company_id").equalsIgnoreCase("getfalse")  */
+				if(jsonResult.getString("success").equalsIgnoreCase("1")) {
+					String quotesString = jsonResult.getString("quotes");
+					//JSONObject quoteDetails = new JSONObject(jsonResult.getString("company_id"));
+					quotesJsonArray = new JSONArray(quotesString);
+					int i;
+					int arrayLength = quotesJsonArray.length();
+					for(i=0;i<arrayLength;i++) {
 						LinearLayout childLinearLayout = new LinearLayout(getApplicationContext());
 				        childLinearLayout.setOrientation(LinearLayout.HORIZONTAL);
 				        childLinearLayout.setPadding(0, 5, 0, 5);
-				        childLinearLayout.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
+				        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
+				        		LayoutParams.MATCH_PARENT, 
+				        		LayoutParams.WRAP_CONTENT				                
+				        );
+				        params.setMargins(0, 0, 0, 10);
+				        childLinearLayout.setLayoutParams(params);
 				        childLinearLayout.setBackgroundResource(R.color.mainColor);
 				        childLinearLayout.setBaselineAligned(false);
 				        childLinearLayout.setWeightSum(100);
@@ -140,7 +156,7 @@ public class Quote extends Activity {
 				        companyName.setTextSize(20);
 				        companyName.setPadding(5, 5, 0, 0);
 				        companyName.setTextColor(getResources().getColor(R.color.whiteColor));
-				        companyName.setText("My company Name");
+				        companyName.setText(quotesJsonArray.getJSONObject(i).getString("company"));
 				        childLinearLayout.addView(companyName);
 				        
 				        TextView companyFare= new TextView(getApplicationContext());
@@ -150,7 +166,7 @@ public class Quote extends Activity {
 				        companyFare.setPadding(0, 5, 0, 0);
 				        companyFare.setTextColor(getResources().getColor(R.color.whiteColor));
 				        companyFare.setTextSize(20);
-				        companyFare.setText("11.40");
+				        companyFare.setText(quotesJsonArray.getJSONObject(i).getString("company_fare_amount"));
 				        childLinearLayout.addView(companyFare);
 				        
 				        Button acceptBtn = new Button(getApplicationContext());
@@ -161,40 +177,15 @@ public class Quote extends Activity {
 				        companyFare.setPadding(0, 0, 0, 5);
 				        acceptBtn.setBackgroundResource(R.drawable.a15);
 				        childLinearLayout.addView(acceptBtn);
-						*/
-					} else {
-						pDialog.dismiss();
-						Log.d("KEY_ERROR",json.getString(KEY_ERROR));
-						Toast.makeText(getApplicationContext(),"Not able to fetch Data",
-									   Toast.LENGTH_LONG).show();
 					}
-				} else {
-						pDialog.dismiss();
-						Log.d("JSON","Wrong JSON");
-						Toast.makeText(getApplicationContext(),"Worng Data",
-							   Toast.LENGTH_LONG).show();
 				}
-			} catch (JSONException e) {
-				pDialog.dismiss();
-				Log.e("JSON","JSONException");
-				Toast.makeText(getApplicationContext(),"Please try Again",
-					   Toast.LENGTH_LONG).show();
+			} catch(JSONException e) {
+				Log.e("JSON in Adding Quote","JSONException");
 				e.printStackTrace();
 			} catch (Exception e) {
 				e.printStackTrace();
-				pDialog.dismiss();
-				Log.e("Exception=>","There is Exception");
-				Toast.makeText(getApplicationContext(),"Please try Again",
-					   Toast.LENGTH_LONG).show();
 			}
-			return null;
-		}
-		/**
-		 * After completing background task Dismiss the progress dialog
-		 * **/
-		protected void onPostExecute(String file_url) {
-			// dismiss the dialog once product deleted
-			pDialog.dismiss();
+			
 		}
 	}
 	

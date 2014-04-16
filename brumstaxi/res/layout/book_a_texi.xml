@@ -59,8 +59,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     />
-                <com.andreabaccega.widget.FormEditText
-                    whatever:testType="alpha"
+                <AutoCompleteTextView
                     android:id="@+id/pickUpFrom"
                     android:textColor="@color/regTextField"
                     android:hint="@string/pick_up_from"
@@ -89,8 +88,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     />
-                <com.andreabaccega.widget.FormEditText
-                    whatever:testType="alpha"
+                <AutoCompleteTextView
                     android:id="@+id/dropOffTo"
                     android:textColor="@color/regTextField"
                     android:hint="@string/drop_off_to"

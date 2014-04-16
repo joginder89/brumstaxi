@@ -20,6 +20,9 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.NumberPicker;
@@ -27,9 +30,10 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
-public class Booktaxi extends Activity implements View.OnClickListener {
+public class Booktaxi extends Activity implements View.OnClickListener,OnItemClickListener {
 	
-	FormEditText pickUpFrom,dropOffTo,bookTaxiComment;
+	FormEditText bookTaxiComment;
+	AutoCompleteTextView pickUpFrom,dropOffTo;
 	Button getQuoteButton,callUsButton,buttonSelectDate,buttonSelectTime;
 	TextView bookTaxiDate,bookTaxiTime;
 	NumberPicker bookTaxiPassengers,bookTaxiLuggage;
@@ -62,6 +66,7 @@ public class Booktaxi extends Activity implements View.OnClickListener {
 	        startActivity(intent);
 	        finish();	
 		}
+        
 		setContentView(R.layout.book_a_texi);
 		
 		Initilizer();
@@ -75,7 +80,19 @@ public class Booktaxi extends Activity implements View.OnClickListener {
 		
 		bookTaxiLuggage.setMaxValue(9);
 		bookTaxiLuggage.setMinValue(0);
+		
+		pickUpFrom.setAdapter(new PlacesAutoCompleteAdapter(this, R.layout.list_item));
+        pickUpFrom.setOnItemClickListener(this);
+        
+        dropOffTo.setAdapter(new PlacesAutoCompleteAdapter(this, R.layout.list_item));
+        dropOffTo.setOnItemClickListener(this);
 	}
+	
+	public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
+        String str = (String) adapterView.getItemAtPosition(position);
+        Toast.makeText(this, str, Toast.LENGTH_SHORT).show();
+    }
+	
 	
 	private void Initilizer() {
 		buttonSelectDate=(Button)findViewById(R.id.buttonSelectDate);
@@ -89,8 +106,8 @@ public class Booktaxi extends Activity implements View.OnClickListener {
 		bookTaxiPassengers = (NumberPicker) findViewById(R.id.bookTaxiPassengers);
 		bookTaxiLuggage = (NumberPicker) findViewById(R.id.bookTaxiLuggage);
 		
-		pickUpFrom = (FormEditText) findViewById(R.id.pickUpFrom);
-		dropOffTo = (FormEditText) findViewById(R.id.dropOffTo);
+		pickUpFrom = (AutoCompleteTextView) findViewById(R.id.pickUpFrom);
+		dropOffTo = (AutoCompleteTextView) findViewById(R.id.dropOffTo);
 		bookTaxiComment = (FormEditText) findViewById(R.id.bookTaxiComment);
 		
 		final Calendar c = Calendar.getInstance();
@@ -240,4 +257,7 @@ public class Booktaxi extends Activity implements View.OnClickListener {
 			pDialog.dismiss();
 		}
 	}
+	/* ######################    Auto Fill Api Code   ################# */
+	
+	
 }

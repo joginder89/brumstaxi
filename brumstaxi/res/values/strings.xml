@@ -26,6 +26,8 @@
     <!-- BookATaxi Page -->
     <string name="pick_up_from">Pick Up From</string>
     <string name="drop_off_to">Drop Off To</string>
+    <string name="search_hint">Search Places</string>
+    <string name="search_settings">Search Places</string>
     <string name="date">Date</string>
     <string name="time">Time</string>
     <string name="passengers">Passengers</string>

@@ -49,13 +49,12 @@
             android:layout_weight="3"
             android:layout_gravity="center_horizontal" />
         
-        
         <Button
             android:id="@+id/bookATaxiButton"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="10"
-            android:background="@drawable/book_a_taxi" />
+            android:background="@drawable/book_taxi" />
         
         <TextView
             android:layout_width="wrap_content"
@@ -69,7 +68,7 @@
             android:layout_height="0dp"
             android:layout_weight="10"
             
-            android:background="@drawable/my_journeys" />
+            android:background="@drawable/my_journey" />
         
         <TextView
             android:layout_width="wrap_content"

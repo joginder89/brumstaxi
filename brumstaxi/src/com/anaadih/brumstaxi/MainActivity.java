@@ -423,7 +423,6 @@ public class MainActivity extends Activity implements View.OnClickListener {
 	    } catch (IOException e) {
 	        // TODO Auto-generated catch block
 	    }
-		
 	}
 	public boolean isNetworkAvailable() {
 	    ConnectivityManager connectivityManager 
