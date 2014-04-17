@@ -1,61 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout 
+<RelativeLayout 
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:whatever="http://schemas.android.com/apk/res-auto"
     android:layout_height="match_parent"
     android:layout_width="match_parent"
     android:orientation="vertical"
-    android:weightSum="100"
     android:background="@drawable/bg"
     >
     <ImageView
         android:id="@+id/register_header"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="10"
+        android:layout_alignParentTop="true"
+        android:layout_height="@dimen/bookTaxiHeaderHeight"
         android:contentDescription="@string/reg_header"
         android:background="@drawable/a1"/>
-      <LinearLayout
+      <ScrollView
           android:id="@+id/PageBody"
           android:layout_width="match_parent"
-          android:layout_height="0dp"
-          android:baselineAligned="false"
-          android:layout_weight="80"
-          android:weightSum="100"
-          android:orientation="horizontal"
-          >
-          <LinearLayout
-              android:id="@+id/leftSideBar"
-              android:layout_width="0dp"
-              android:layout_weight="5"
-              android:layout_height="fill_parent"
-              android:orientation="vertical"
-              ></LinearLayout>
+          android:layout_height="wrap_content"
+          android:layout_marginTop="@dimen/bookTaxiHeaderHeight" >
+           
           <LinearLayout
               android:id="@+id/pageContent"
-              android:layout_width="0dp"
-              android:layout_weight="90"
-              android:layout_height="fill_parent"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
               android:orientation="vertical"
-              android:weightSum="100"
               >
-              <LinearLayout
-              android:layout_height="0dp"
-              android:layout_width="fill_parent"
-              android:layout_weight="2"
-              android:orientation="horizontal"
-              ></LinearLayout>
              <LinearLayout
 	            android:layout_width="match_parent"
-	            android:layout_height="0dp"
-	            android:layout_weight="17"
+	            android:layout_height="@dimen/bookTaxiHeaderHeight"
 	            android:background="@drawable/rounded_corner"
-	            android:orientation="vertical" >
+	            android:layout_marginTop="@dimen/bookTaxiElementSpace"
+	            android:layout_marginLeft="@dimen/bookTaxiMarginLeft"
+	            android:layout_marginRight="@dimen/bookTaxiMarginLeft"
+	            android:orientation="vertical" 
+	            >
                 <TextView
                     android:id="@+id/pickUpFromLabel"
                     android:textColor="@color/blackColor"
                     android:text="@string/pick_up_from"
                     android:textSize="17sp"
+                    android:paddingLeft="@dimen/bTaxiPaddingLeft"
+                    android:paddingTop="@dimen/bTaxiPaddingLeft"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     />
@@ -67,24 +53,22 @@
                     android:layout_width="fill_parent"
                     android:layout_height="fill_parent"
                     />
-        </LinearLayout>
-        <LinearLayout
-              android:layout_height="0dp"
-              android:layout_width="fill_parent"
-              android:layout_weight="2"
-              android:orientation="horizontal"
-              ></LinearLayout>
+             </LinearLayout>
              <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="17"
+                android:layout_height="@dimen/bookTaxiHeaderHeight"
+                android:layout_marginLeft="@dimen/bookTaxiMarginLeft"
+                android:layout_marginRight="@dimen/bookTaxiMarginLeft"
                 android:background="@drawable/rounded_corner"
+                android:layout_marginTop="@dimen/bookTaxiElementSpace"
                 android:orientation="vertical" >
                 <TextView
                     android:id="@+id/dropOffToLabel"
                     android:textColor="@color/blackColor"
                     android:text="@string/drop_off_to"
                     android:textSize="17sp"
+                    android:paddingLeft="@dimen/bTaxiPaddingLeft"
+                    android:paddingTop="@dimen/bTaxiPaddingLeft"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     />
@@ -96,18 +80,15 @@
                     android:layout_width="fill_parent"
                     android:layout_height="fill_parent"
                     />
-        </LinearLayout>
-        <LinearLayout
-              android:layout_height="0dp"
-              android:layout_width="fill_parent"
-              android:layout_weight="2"
-              android:orientation="horizontal"
-              ></LinearLayout>
+         </LinearLayout>
          <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="17"
+            android:layout_height="@dimen/bookTaxiDateTimeHeight"
             android:weightSum="100"
+            android:layout_marginTop="@dimen/bookTaxiElementSpace"
+            android:layout_marginLeft="@dimen/bookTaxiMarginLeft"
+            android:layout_marginRight="@dimen/bookTaxiMarginLeft"
+            android:baselineAligned="false" 
             android:orientation="horizontal" >
                 <LinearLayout
 		                android:layout_width="0dp"
@@ -217,23 +198,22 @@
                  </LinearLayout>
                  
         </LinearLayout>
-        <LinearLayout
-              android:layout_height="0dp"
-              android:layout_width="fill_parent"
-              android:layout_weight="2"
-              android:orientation="horizontal"
-              ></LinearLayout>
+        
              <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="23"
+                android:layout_height="@dimen/bookTaxiHeaderHeight"
                 android:background="@drawable/rounded_corner"
+                android:layout_marginLeft="@dimen/bookTaxiMarginLeft"
+                android:layout_marginRight="@dimen/bookTaxiMarginLeft"
+                android:layout_marginTop="@dimen/bookTaxiElementSpace"
                 android:orientation="vertical" >
                 <TextView
                     android:id="@+id/commentLabel"
                     android:textColor="@color/blackColor"
                     android:text="@string/comments"
                     android:textSize="17sp"
+                    android:paddingLeft="@dimen/bTaxiPaddingLeft"
+                    android:paddingTop="@dimen/bTaxiPaddingLeft"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                  />
@@ -244,7 +224,7 @@
                     android:hint="@string/comments"
                     android:textSize="17sp"
                     android:layout_width="fill_parent"
-                    android:layout_height="fill_parent"
+                    android:layout_height="@dimen/bTaxiCommentHeight"
                     android:inputType="textMultiLine" 
 				    android:lines="5" 
 				    android:minLines="1" 
@@ -253,40 +233,25 @@
 				    android:scrollbars="vertical"
                     />
         </LinearLayout>
-        <LinearLayout
-           android:layout_height="0dp"
-           android:layout_width="fill_parent"
-           android:layout_weight="2"
-           android:orientation="horizontal"
-           ></LinearLayout>
+        
         <Button
             android:id="@+id/getQuoteButton"
             android:layout_width="fill_parent"
-            android:layout_height="0dp"
-            android:layout_weight="14"
+            android:layout_height="@dimen/bookTaxiHeaderHeight"
             android:background="@drawable/get_a_quote"
-            />
-        <LinearLayout
-           android:layout_height="0dp"
-           android:layout_width="fill_parent"
-           android:layout_weight="2"
-           android:orientation="horizontal"
-           ></LinearLayout>
+            android:layout_marginLeft="@dimen/bookTaxiMarginLeft"
+            android:layout_marginRight="@dimen/bookTaxiMarginLeft"
+            android:layout_marginTop="@dimen/bookTaxiElementSpace"
+            android:layout_marginBottom="@dimen/bookTaxiHeaderHeight"
+            />  
       </LinearLayout>
-        <LinearLayout 
-              android:id="@+id/rigthSideBar"
-              android:layout_width="0dp"
-              android:layout_weight="5"
-              android:layout_height="fill_parent"
-              android:orientation="vertical"
-              >
-        </LinearLayout>  
-      </LinearLayout>
+      </ScrollView>
   <Button 
       android:id="@+id/callUsButton"
-      android:layout_height="0dp"
-      android:layout_weight="10"
+      android:layout_marginTop="@dimen/bookTaxiHeaderHeight"
+      android:layout_height="@dimen/bookTaxiHeaderHeight"
       android:layout_width="match_parent"
+      android:layout_alignParentBottom="true"
       android:background="@drawable/reg_call"
       />   	   
-</LinearLayout>
+</RelativeLayout>

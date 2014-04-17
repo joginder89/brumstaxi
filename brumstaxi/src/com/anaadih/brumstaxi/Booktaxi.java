@@ -51,7 +51,6 @@ public class Booktaxi extends Activity implements View.OnClickListener,OnItemCli
 	
 	// JSON Response node names
 			private static String KEY_SUCCESS = "success";
-			private static String KEY_ERROR = "error";
 			private static String KEY_ERROR_MSG = "error_msg";
 	
 	@Override

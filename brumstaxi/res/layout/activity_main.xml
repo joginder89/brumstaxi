@@ -41,7 +41,7 @@
             android:layout_height="0dp"
             android:layout_weight="13"
             android:contentDescription="@string/logodesc"
-            android:background="@drawable/logo" />
+            android:background="@drawable/logoi" />
        
        <TextView
             android:layout_width="wrap_content"
@@ -88,14 +88,14 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="10"
-            android:background="@drawable/registration" />
+            android:background="@drawable/register" />
 
     </LinearLayout>
     
     <Button
         android:id="@+id/callUsButton"
         android:layout_width="match_parent"
-        android:layout_height="61dp"
+        android:layout_height="@dimen/bookTaxiHeaderHeight"
         android:layout_alignParentBottom="true"
         android:background="@drawable/call_us" />
 

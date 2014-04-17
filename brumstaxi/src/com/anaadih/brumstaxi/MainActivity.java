@@ -19,6 +19,7 @@ import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.google.android.gms.gcm.GoogleCloudMessaging;
 
+import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.media.SoundPool;
 import android.net.ConnectivityManager;
@@ -205,8 +206,8 @@ public class MainActivity extends Activity implements View.OnClickListener {
 	}
     
     public void goToMyJourneyPage() {
-    	/*Intent intent = new Intent(this,RegistrationResponse.class);
-         startActivity(intent);*/
+    	Intent intent = new Intent(this,RegistrationResponse.class);
+         startActivity(intent);
 	}
     
    /* public void goToFutureJourneyPage() {
@@ -326,9 +327,13 @@ public class MainActivity extends Activity implements View.OnClickListener {
 	            String msg = "";
 	            AssetFileDescriptor afd;
 	    		try {
+	    			
+	    			
 	    			afd = getAssets().openFd("brumstaxi.wav");
 		    		player = new MediaPlayer();
+		    		
 		    		player.setDataSource(afd.getFileDescriptor(), afd.getStartOffset(),afd.getLength());
+		    		player.setVolume(8, 8);
 		    		player.prepare();
 		    		player.start();
 	    		} catch (IOException e) {
