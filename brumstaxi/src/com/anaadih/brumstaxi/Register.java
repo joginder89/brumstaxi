@@ -169,6 +169,7 @@ public class Register extends Activity implements View.OnClickListener {
 						      
 						      Intent intent = new Intent(Register.this,RegistrationResponse.class);
 						         startActivity(intent);
+						         finish();
 						      
 						      if(sharedpreferences.contains("userId")) {
 					    			//button.setVisibility(View.VISIBLE);
@@ -191,15 +192,6 @@ public class Register extends Activity implements View.OnClickListener {
 								e.printStackTrace();
 						  }
 						
-					      Intent dashboard = new Intent(getApplicationContext(),
-								MainActivity.class);
-						
-						// Close all views before launching Dashboard
-						dashboard.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-						startActivity(dashboard);
-						
-						// Close Login Screen
-						finish();
 					} else {
 						pDialog.dismiss();
 						Log.d("KEY_ERROR",json.getString(KEY_ERROR));

@@ -85,10 +85,10 @@ public class GcmIntentService extends IntentService {
 
         NotificationCompat.Builder mBuilder =
                 new NotificationCompat.Builder(this)
-        .setSmallIcon(R.drawable.logo1)
+        .setSmallIcon(R.drawable.ic_launcher)
         .setContentTitle("Brums Taxi Notification")
         .setStyle(new NotificationCompat.BigTextStyle()
-        .bigText(msg))
+        .bigText("Cab company has provided the details. Please check"))
         .setContentText("Cab company has provided the details. Please check");
 
         mBuilder.setContentIntent(contentIntent);

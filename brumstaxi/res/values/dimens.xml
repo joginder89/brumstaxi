@@ -4,8 +4,8 @@
 	
 	<!--  Book a Taxi  -->
     
-	<dimen name="needTaxiSize">28sp</dimen>
-	<dimen name="tiredOfWaitingSize">16sp</dimen>
+	<dimen name="needTaxiSize">30sp</dimen>
+	<dimen name="tiredOfWaitingSize">17sp</dimen>
 	<dimen name="bookTaxiHeaderHeight">60dp</dimen>
 	<dimen name="bookTaxiElementSpace">20dp</dimen>
 	<dimen name="bookTaxiDateTimeHeight">120dp</dimen>
@@ -13,5 +13,6 @@
 	<dimen name="bTaxiPaddingLeft">8dp</dimen>
 	<dimen name="bTaxiPaddingTop">10dp</dimen>
 	<dimen name="bTaxiCommentHeight">32dp</dimen>
+	<dimen name="bTaxiDateTimeTextSize">14sp</dimen>
 	
 </resources>

@@ -1,6 +1,9 @@
 package com.anaadih.brumstaxi;
 
+import java.text.DateFormatSymbols;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -8,6 +11,7 @@ import org.json.JSONObject;
 import com.anaadih.brumstaxi.library.UserFunctions;
 import com.andreabaccega.widget.FormEditText;
 
+import android.R.string;
 import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
@@ -16,6 +20,7 @@ import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.ParseException;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -25,23 +30,28 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.LinearLayout;
 import android.widget.NumberPicker;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
+import android.view.View.OnClickListener;
 
 public class Booktaxi extends Activity implements View.OnClickListener,OnItemClickListener {
 	
 	FormEditText bookTaxiComment;
 	AutoCompleteTextView pickUpFrom,dropOffTo;
-	Button getQuoteButton,callUsButton,buttonSelectDate,buttonSelectTime;
+	Button getQuoteButton,callUsButton;
+	//Button buttonSelectDate,buttonSelectTime;
 	TextView bookTaxiDate,bookTaxiTime;
-	NumberPicker bookTaxiPassengers,bookTaxiLuggage;
+	TextView bookTaxiPassengers,bookTaxiLuggage;
+	LinearLayout layoutSelectDate,layoutSelectTime,lauoutPassengers,layoutLuggage;
 	private ProgressDialog pDialog;
 	boolean allValid = true;
 	public static final String MyPREFERENCES = "BrumsTaxiPrefs" ;
     public String userId;
     SharedPreferences sharedpreferences;
+    String noOfPassangers,noOfLuggage;
 	
 	static final int DATE_DIALOG_ID = 0;
 	static final int TIME_DIALOG_ID=1;
@@ -69,16 +79,14 @@ public class Booktaxi extends Activity implements View.OnClickListener,OnItemCli
 		setContentView(R.layout.book_a_texi);
 		
 		Initilizer();
-		buttonSelectDate.setOnClickListener(this);
-		buttonSelectTime.setOnClickListener(this);
+		
 		getQuoteButton.setOnClickListener(this);
 		callUsButton.setOnClickListener(this);
 		
-		bookTaxiPassengers.setMaxValue(9);
-		bookTaxiPassengers.setMinValue(1);
-		
-		bookTaxiLuggage.setMaxValue(9);
-		bookTaxiLuggage.setMinValue(0);
+		layoutSelectDate.setOnClickListener(this);
+		layoutSelectTime.setOnClickListener(this);
+		lauoutPassengers.setOnClickListener(this);
+		layoutLuggage.setOnClickListener(this);
 		
 		pickUpFrom.setAdapter(new PlacesAutoCompleteAdapter(this, R.layout.list_item));
         pickUpFrom.setOnItemClickListener(this);
@@ -92,22 +100,29 @@ public class Booktaxi extends Activity implements View.OnClickListener,OnItemCli
         Toast.makeText(this, str, Toast.LENGTH_SHORT).show();
     }
 	
-	
 	private void Initilizer() {
-		buttonSelectDate=(Button)findViewById(R.id.buttonSelectDate);
-		buttonSelectTime=(Button)findViewById(R.id.buttonSelectTime);
+		
+		/*buttonSelectDate=(Button)findViewById(R.id.buttonSelectDate);
+		buttonSelectTime=(Button)findViewById(R.id.buttonSelectTime);*/
+		
 		getQuoteButton=(Button)findViewById(R.id.getQuoteButton);
 		callUsButton=(Button)findViewById(R.id.callUsButton);
 		
 		bookTaxiDate=(TextView)findViewById(R.id.bookTaxiDate);
 		bookTaxiTime=(TextView)findViewById(R.id.bookTaxiTime);
 		
-		bookTaxiPassengers = (NumberPicker) findViewById(R.id.bookTaxiPassengers);
-		bookTaxiLuggage = (NumberPicker) findViewById(R.id.bookTaxiLuggage);
+		bookTaxiPassengers = (TextView) findViewById(R.id.bookTaxiPassengers);
+		bookTaxiLuggage = (TextView) findViewById(R.id.bookTaxiLuggage);
 		
 		pickUpFrom = (AutoCompleteTextView) findViewById(R.id.pickUpFrom);
 		dropOffTo = (AutoCompleteTextView) findViewById(R.id.dropOffTo);
 		bookTaxiComment = (FormEditText) findViewById(R.id.bookTaxiComment);
+		
+		layoutSelectDate = (LinearLayout) findViewById (R.id.layoutSelectDate);
+		layoutSelectTime = (LinearLayout) findViewById (R.id.layoutSelectTime);
+		lauoutPassengers = (LinearLayout) findViewById (R.id.lauoutPassengers);
+		layoutLuggage = (LinearLayout) findViewById (R.id.layoutLuggage);
+		
 		
 		final Calendar c = Calendar.getInstance();
         mYear = c.get(Calendar.YEAR);
@@ -122,23 +137,25 @@ public class Booktaxi extends Activity implements View.OnClickListener,OnItemCli
 	public void onClick(View v) {
 		
 		switch(v.getId()){
-			case R.id.buttonSelectDate:
+			case R.id.layoutSelectDate:
 				showDialog(DATE_DIALOG_ID);
 				break;
-			case R.id.buttonSelectTime:
+			case R.id.layoutSelectTime:
 				showDialog(TIME_DIALOG_ID);
-				Toast.makeText(getApplicationContext(),"TIME_DIALOG_ID",
-						   Toast.LENGTH_LONG).show();
-				Log.d("TIME_DIALOG_ID", "Click");
 				break;
 			case R.id.getQuoteButton:
 				new getQuote().execute();
-				Toast.makeText(getApplicationContext(),"Click",
-						   Toast.LENGTH_LONG).show();
-				Log.d("getQuoteButton", "Click");
+				break;
+			case R.id.lauoutPassengers:
+				getPassengers();
+				break;
+			case R.id.layoutLuggage:
+				getLuggage();
 				break;
 		}
 	}
+	
+	
 	
 	// Register  DatePickerDialog listener
     private DatePickerDialog.OnDateSetListener mDateSetListener =
@@ -150,8 +167,10 @@ public class Booktaxi extends Activity implements View.OnClickListener,OnItemCli
             year = yearSelected;
             month = monthOfYear;
             day = dayOfMonth;
+           
              // Set the Selected Date in Select date Button
-            bookTaxiDate.setText("Date selected : "+day+"-"+(month+1)+"-"+year);
+            //bookTaxiDate.setText(""+day+"-"+(month+1)+"-"+year);
+            bookTaxiDate.setText(""+day+" "+new DateFormatSymbols().getMonths()[month]);
         }
     };
 
@@ -161,8 +180,9 @@ public class Booktaxi extends Activity implements View.OnClickListener,OnItemCli
 		@Override
 		public void onTimeSet(TimePicker view, int hourOfDay, int min) {
 			hour = hourOfDay;
-            minute = min;
-            bookTaxiTime.setText("Time selected :"+hour+"-"+minute);
+            minute = min;            
+            //getTime(hourOfDay,min);
+            bookTaxiTime.setText(""+hour+"-"+minute);
           }
 	};
 	
@@ -205,20 +225,21 @@ public class Booktaxi extends Activity implements View.OnClickListener,OnItemCli
 			long startTime = calendar.getTimeInMillis()/1000;
 			sharedpreferences=getSharedPreferences(MyPREFERENCES, 
   			      Context.MODE_PRIVATE);
+			
 			String userId=sharedpreferences.getString("userId", "");
 			String pickUpFromValue=pickUpFrom.getText().toString();
 			String dropOffToValue=dropOffTo.getText().toString();
 			String bookTaxiCommentValue=bookTaxiComment.getText().toString();
 			String pickupTimestamp = Long.toString(startTime);
-			int noOfPassengers=bookTaxiPassengers.getValue();
-			int noOfLuggage=bookTaxiLuggage.getValue();
+			int noOfPassengers=Integer.getInteger(noOfPassangers);
+			int noOfLuggages=Integer.getInteger(noOfLuggage);
 			
 			UserFunctions userFunction = new UserFunctions();
 			
 			JSONObject json = userFunction.getQuote(userId,pickUpFromValue,
 					dropOffToValue,bookTaxiCommentValue,pickupTimestamp,
-					noOfPassengers,noOfLuggage);
-			
+					noOfPassengers,noOfLuggages);
+			Log.d("TextBookingDataAtBooktaxi",userId+"="+pickUpFromValue+"="+pickupTimestamp+"="+String.valueOf(noOfPassengers));
 			// check for login response
 			try {
 				if(json.getString(KEY_SUCCESS) != null) {
@@ -256,7 +277,84 @@ public class Booktaxi extends Activity implements View.OnClickListener,OnItemCli
 			pDialog.dismiss();
 		}
 	}
-	/* ######################    Auto Fill Api Code   ################# */
 	
+/*	string getTime(int hrs,int mint) {
+		
+		String s = hrs+":"+mint+":00";
+		final String time = hrs+":"+mint;
+
+		try {
+		    final SimpleDateFormat sdf = new SimpleDateFormat("H:mm a");
+		    final Date dateObj = sdf.parse(time);
+		    System.out.println(dateObj);
+		    System.out.println(new SimpleDateFormat("K:mm a").format(dateObj));
+		} catch (final ParseException e) {
+		    e.printStackTrace();
+		} catch (java.text.ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;	
+	
+	}
+*/	
+	public void getPassengers() {
+         final Dialog d = new Dialog(Booktaxi.this);
+         d.setTitle("NumberPicker");
+         d.setContentView(R.layout.numberpicker_dialog);
+         Button b1 = (Button) d.findViewById(R.id.numPickerSetBtn);
+         Button b2 = (Button) d.findViewById(R.id.numPickerCancelBtn);
+         
+         final NumberPicker np = (NumberPicker) d.findViewById(R.id.numberPicker1);
+         np.setMaxValue(9);
+         np.setMinValue(1);
+         np.setWrapSelectorWheel(false);
+         //np.setOnValueChangedListener((OnValueChangeListener) Booktaxi.this);
+         b1.setOnClickListener(new OnClickListener() {
+          @Override
+          public void onClick(View v) {
+        	  noOfPassangers = String.valueOf(np.getValue());
+        	  bookTaxiPassengers.setText(noOfPassangers);
+              d.dismiss();
+           }    
+          });
+         b2.setOnClickListener(new OnClickListener() {
+          @Override
+          public void onClick(View v) {
+              d.dismiss();
+          }    
+          });
+       d.show();
+    }
+	
+	
+	public void getLuggage() {
+        final Dialog d = new Dialog(Booktaxi.this);
+        d.setTitle("NumberPicker");
+        d.setContentView(R.layout.numberpicker_dialog);
+        Button b1 = (Button) d.findViewById(R.id.numPickerSetBtn);
+        Button b2 = (Button) d.findViewById(R.id.numPickerCancelBtn);
+        
+        final NumberPicker np = (NumberPicker) d.findViewById(R.id.numberPicker1);
+        np.setMaxValue(9);
+        np.setMinValue(0);
+        np.setWrapSelectorWheel(false);
+        //np.setOnValueChangedListener((OnValueChangeListener) Booktaxi.this);
+        b1.setOnClickListener(new OnClickListener() {
+         @Override
+         public void onClick(View v) {
+        	 	noOfLuggage = String.valueOf(np.getValue());
+        	 	bookTaxiLuggage.setText(noOfLuggage);
+       	  		d.dismiss();
+          }    
+         });
+        b2.setOnClickListener(new OnClickListener() {
+         @Override
+         public void onClick(View v) {
+             d.dismiss();
+         }    
+         });
+      d.show();
+   }
 	
 }

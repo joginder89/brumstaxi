@@ -170,7 +170,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
 				case R.id.bookATaxiButton:
 					Intent intent = new Intent(MainActivity.this,
 							Booktaxi.class);
-			         startActivity(intent);
+			        startActivity(intent);
 					break;
 				case R.id.registrationButton:
 					goToRegisterPage();
@@ -328,12 +328,11 @@ public class MainActivity extends Activity implements View.OnClickListener {
 	            AssetFileDescriptor afd;
 	    		try {
 	    			
-	    			
 	    			afd = getAssets().openFd("brumstaxi.wav");
 		    		player = new MediaPlayer();
 		    		
 		    		player.setDataSource(afd.getFileDescriptor(), afd.getStartOffset(),afd.getLength());
-		    		player.setVolume(8, 8);
+		    		player.setVolume(10, 10);
 		    		player.prepare();
 		    		player.start();
 	    		} catch (IOException e) {

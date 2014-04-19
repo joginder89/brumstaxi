@@ -1,196 +1,221 @@
 <?xml version="1.0" encoding="utf-8"?>
-	<RelativeLayout
-	    xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:whatever="http://schemas.android.com/apk/res-auto"
-	    android:layout_height="wrap_content"
-	    android:layout_width="fill_parent"
-	    android:background="@drawable/background"
-	    >
-	    <ImageView
-	        android:id="@+id/register_header"
-	        android:layout_width="fill_parent"
-	        android:layout_height="40dp"
-	        android:layout_alignParentTop="true"
-	        android:contentDescription="@string/reg_header"
-	        android:src="@drawable/register_header" />
-	    
-	    <RelativeLayout
-	        android:layout_width="fill_parent"
-	        android:layout_height="fill_parent"
-	        android:paddingTop="50dp"
-	        android:paddingLeft="20dp" 
-	        android:paddingBottom="80dp" 
-	        android:paddingRight="20dp" >
-	
-	        <RelativeLayout
-	            android:id="@+id/relativeLayout1"
-	            android:layout_width="140dp"
-	            android:layout_height="60dp"
-	            android:paddingLeft="10dp"
-	            android:layout_alignParentLeft="true"
-	            android:layout_alignParentTop="true"
-	            android:background="@drawable/rounded_corner" >
-	            
-	            <TextView
-	                android:id="@+id/regYourNameLabel"
-	                android:layout_alignParentTop="true"
-	                android:textColor="@color/blackColor"
-	                android:text="@string/yourname"
-	                android:textSize="17sp"
-	                android:layout_width="wrap_content"
-	                android:layout_height="wrap_content"
-	                />
-	            <com.andreabaccega.widget.FormEditText
-	                whatever:testType="alpha"
-	                android:id="@+id/regYourName"
-	                android:layout_alignParentBottom="true"
-	                android:textColor="@color/regTextField"
-	                android:hint="@string/name"
-	                android:textSize="17sp"
-	                android:layout_width="fill_parent"
-	                android:layout_height="wrap_content"
-	                />
-	            
-	        </RelativeLayout>
-	
-	        <RelativeLayout
-	            android:id="@+id/relativeLayout2"
-	            android:layout_width="140dp"
-	            android:layout_height="60dp"
-	            android:paddingLeft="10dp"
-	            android:layout_alignParentTop="true"
-	            android:layout_alignParentRight="true"
-	            android:background="@drawable/rounded_corner" >
-	            
-	            <TextView
-	                android:id="@+id/regMobileLabel"
-	                android:layout_alignParentTop="true"
-	                android:textColor="@color/blackColor"
-	                android:text="@string/yourmobile"
-	                android:textSize="17sp"
-	                android:layout_width="wrap_content"
-	                android:layout_height="wrap_content"
-	                />
-	            <com.andreabaccega.widget.FormEditText
-	                whatever:testType="phone"
-	                android:id="@+id/regMobile"
-	                android:layout_alignParentBottom="true"
-	                android:textColor="@color/regTextField"
-	                android:hint="@string/yourmobile"
-	                android:textSize="17sp"
-	                android:inputType="phone"
-	                android:layout_width="fill_parent"
-	                android:layout_height="wrap_content"
-	                />
-	        </RelativeLayout>
-	        
-	        <RelativeLayout
-	            android:id="@+id/relativeLayout3"
-	            android:layout_width="fill_parent"
-	            android:layout_height="60dp"
-	            android:layout_below="@+id/relativeLayout2"
-	            android:layout_marginTop="20dp"
-	            android:paddingLeft="20dp"
-	            android:background="@drawable/rounded_corner" >
-	            
-	            <TextView
-	                android:id="@+id/regusernameLabel"
-	                android:layout_alignParentTop="true"
-	                android:textColor="@color/blackColor"
-	                android:text="@string/username"
-	                android:textSize="17sp"
-	                android:layout_width="wrap_content"
-	                android:layout_height="wrap_content"
-	                />
-	            <com.andreabaccega.widget.FormEditText
-	                whatever:testType="alphaNumeric"
-	                android:id="@+id/regUsername"
-	                android:layout_alignParentBottom="true"
-	                android:textColor="@color/regTextField"
-	                android:hint="@string/username"
-	                android:textSize="17sp"
-	                android:layout_width="fill_parent"
-	                android:layout_height="wrap_content"
-	                />
-	        </RelativeLayout>
-	        
-	        <RelativeLayout
-	            android:id="@+id/relativeLayout4"
-	            android:layout_width="fill_parent"
-	            android:layout_height="60dp"
-	            android:layout_below="@+id/relativeLayout3"
-	            android:layout_marginTop="10dp"
-	            android:paddingLeft="20dp"
-	            android:background="@drawable/rounded_corner" >
-	            
-	            <TextView
-	                android:id="@+id/regPassLabel"
-	                android:layout_alignParentTop="true"
-	                android:textColor="@color/blackColor"
-	                android:text="@string/password"
-	                android:textSize="17sp"
-	                android:layout_width="wrap_content"
-	                android:layout_height="wrap_content"
-	                />
-	            <com.andreabaccega.widget.FormEditText
+<LinearLayout 
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:whatever="http://schemas.android.com/apk/res-auto"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/background"
+    android:weightSum="100"
+    >
+    <ImageView
+      
+        android:id="@+id/register_header"
+        android:layout_width="match_parent"
+        android:layout_weight="10"
+        android:layout_height="0dip"
+        android:contentDescription="@string/abc_action_bar_home_description"
+        android:layout_marginTop="20dip"
+        android:background="@drawable/register_header"/>
+        
+        
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="0dip"
+            android:layout_weight="17"
+            android:baselineAligned="false"
+            
+            android:layout_margin="10dp" 
+          
+            android:orientation="horizontal"
+            android:weightSum="1" >
+    
+            <LinearLayout
+                android:id="@+id/relativeLayout1"
+                android:layout_width="0dip"
+                android:layout_height="fill_parent"
+              android:orientation="vertical"
+                android:layout_weight=".5"
+                android:layout_marginRight="5dip"
+                android:background="@drawable/rounded_corner" >
+                
+                <TextView
+                    android:id="@+id/regYourNameLabel"
+                    
+                    android:textColor="@color/blackColor"
+                    android:text="@string/yourname"
+                    android:textSize="17sp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    />
+                <com.andreabaccega.widget.FormEditText
+                    whatever:testType="alpha"
+                    android:id="@+id/regYourName"
+                    
+                    android:textColor="@color/regTextField"
+                    
+                    android:textSize="16sp"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                     android:background="#00000000"
+                       android:layout_marginBottom="2dip"
+                />
+                
+            </LinearLayout>
+    
+            <LinearLayout
+                android:id="@+id/relativeLayout2"
+                android:layout_width="0dp"
+                android:layout_height="fill_parent"
+                android:orientation="vertical"
+                 android:layout_weight=".5"
+                  
+               android:layout_marginLeft="5dip"
+                android:background="@drawable/rounded_corner" >
+                
+                <TextView
+                   
+                    android:id="@+id/regMobileLabel"
+                    android:textColor="@color/blackColor"
+                    android:text="@string/yourmobile"
+                    android:textSize="17sp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    />
+                <com.andreabaccega.widget.FormEditText
+                    whatever:testType="phone"
+                    android:id="@+id/regMobile"
+                    android:textColor="@color/regTextField"
+                    
+                    android:textSize="16sp"
+                    android:inputType="phone"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                     android:background="#00000000"
+                      android:layout_marginBottom="2dip"
+                    />
+            </LinearLayout>
+            </LinearLayout>
+            <RelativeLayout
+                android:id="@+id/relativeLayout3"
+                android:layout_width="fill_parent"
+                android:layout_height="0dp"
+                  android:layout_weight="16"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dip"
+                android:layout_marginBottom="10dip"
+               
+                android:background="@drawable/rounded_corner" >
+                
+                <TextView
+                    android:id="@+id/regusernameLabel"
+                    android:layout_alignParentTop="true"
+                    android:textColor="@color/blackColor"
+                    android:text="@string/username"
+                    android:textSize="17sp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    />
+                <com.andreabaccega.widget.FormEditText
+                    whatever:testType="alphaNumeric"
+                    android:id="@+id/regUsername"
+                    android:layout_below="@+id/regusernameLabel"
+                    android:textColor="@color/regTextField"
+                    
+                    android:textSize="17sp"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                     android:background="#00000000"
+                    />
+            </RelativeLayout>
+            
+            <RelativeLayout
+                android:id="@+id/relativeLayout4"
+                android:layout_width="fill_parent"
+                android:layout_height="0dp"
+                  android:layout_weight="16"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dip"
+                android:layout_marginBottom="10dip"
+                android:background="@drawable/rounded_corner" >
+                
+                <TextView
+                    android:id="@+id/regPassLabel"
+                    android:layout_alignParentTop="true"
+                    android:textColor="@color/blackColor"
+                    android:text="@string/password"
+                    android:textSize="17sp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    />
+                <com.andreabaccega.widget.FormEditText
                     whatever:testType="nocheck"
-	                android:id="@+id/regPassword"
-	                android:layout_alignParentBottom="true"
-	                android:textColor="@color/regTextField"
-	                android:inputType="textPassword"
-	                android:hint="@string/password"
-	                android:textSize="17sp"
-	                android:layout_width="fill_parent"
-	                android:layout_height="wrap_content"
-	                />
-	        </RelativeLayout>
-	
-	        <RelativeLayout
-	            android:id="@+id/relativeLayout5"
-	            android:layout_width="fill_parent"
-	            android:layout_height="60dp"
-	            android:layout_below="@+id/relativeLayout4"
-	            android:layout_marginTop="10dp"
-	            android:paddingLeft="20dp"
-	            android:background="@drawable/rounded_corner" >
-	            
-	            <TextView
-	                android:id="@+id/regRePassLabel"
-	                android:layout_alignParentTop="true"
-	                android:textColor="@color/blackColor"
-	                android:text="@string/confirmpassword"
-	                android:textSize="17sp"
-	                android:layout_width="wrap_content"
-	                android:layout_height="wrap_content"
-	                />
-	            <com.andreabaccega.widget.FormEditText
+                    android:id="@+id/regPassword"
+                    android:layout_below="@+id/regPassLabel"
+                    android:textColor="@color/regTextField"
+                    android:inputType="textPassword"
+                   
+                    android:textSize="17sp"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                     android:background="#00000000"
+                    />
+            </RelativeLayout>
+    
+            <RelativeLayout
+                android:id="@+id/relativeLayout5"
+                android:layout_width="fill_parent"
+                android:layout_height="0dp"
+                android:layout_weight="16"
+                 android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dip"
+                android:layout_marginBottom="8dip"
+                android:background="@drawable/rounded_corner" >
+                
+                <TextView
+                    android:id="@+id/regRePassLabel"
+                    android:layout_alignParentTop="true"
+                    android:textColor="@color/blackColor"
+                    android:text="@string/confirmpassword"
+                    android:textSize="17sp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    />
+                <com.andreabaccega.widget.FormEditText
                     whatever:testType="nocheck"
-	                android:id="@+id/regConfirmPassword"
-	                android:layout_alignParentBottom="true"
-	                android:inputType="textPassword"
-	                android:textColor="@color/regTextField"
-	                android:hint="@string/confirmpassword"
-	                android:textSize="17sp"
-	                android:layout_width="fill_parent"
-	                android:layout_height="wrap_content"
-	                />
-	        </RelativeLayout>
-	
-	        <Button
-	            android:id="@+id/regButton"
-	            android:layout_width="fill_parent"
-	            android:layout_height="50dp"
-	            android:layout_below="@+id/relativeLayout5"
-	            android:layout_centerHorizontal="true"
-	            android:layout_marginTop="10dp"
-	            android:background="@drawable/reg_account" />
-	    </RelativeLayout>
-	
-	    <Button
-	        android:id="@+id/callUsButton"
-	        android:layout_width="fill_parent"
-	        android:layout_height="61dp"
-	        android:layout_alignParentBottom="true"
-	        android:background="@drawable/call_us" />
-	
-	</RelativeLayout>
+                    android:id="@+id/regConfirmPassword"
+                   android:layout_below="@+id/regRePassLabel"
+                    android:inputType="textPassword"
+                    android:textColor="@color/regTextField"
+                   
+                    android:textSize="17sp"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                     android:background="#00000000"
+                    />
+            </RelativeLayout>
+    
+            <Button
+                android:id="@+id/regButton"
+                android:layout_width="fill_parent"
+               android:layout_height="0dp"
+                android:layout_weight="12.5"
+                 android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dip"
+               android:layout_marginBottom="14dip"
+                android:background="@drawable/reg_account" />
+        
+    
+        <Button 
+      android:id="@+id/callUsButton"
+      
+      android:layout_height="0dip"
+      android:layout_width="match_parent"
+      android:layout_weight="12.5"
+      android:layout_gravity="bottom"
+      android:gravity="bottom"
+      android:background="@drawable/reg_call"
+      />
+    
+    
+</LinearLayout>

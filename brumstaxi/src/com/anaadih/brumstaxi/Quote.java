@@ -16,7 +16,9 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
+import android.view.View;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.Button;
 import android.widget.LinearLayout;
@@ -26,7 +28,7 @@ import android.widget.Toast;
 public class Quote extends Activity {
 		
 		int user_request_id,i;
-		 JSONArray quotesJsonArray;
+		JSONArray quotesJsonArray;
 		TextView qtPickingupValue;
 		TextView qtDropOffValue;
 		TextView qtDateTimeValue;
@@ -34,10 +36,12 @@ public class Quote extends Activity {
 		TextView qtLuggageValue;
 		LinearLayout parentLayout;
 		
+		
 	  	private ProgressDialog pDialog;
 	    JSONObject json;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
+		Log.d("THREADTEST","MainThread=>"+Long.toString(Thread.currentThread().getId()));
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.quotes);
 		Initializer();
@@ -100,12 +104,14 @@ public class Quote extends Activity {
 			pDialog.setIndeterminate(false);
 			pDialog.setCancelable(true);
 			pDialog.show();
+			Log.d("THREADTEST","PRE=>"+Long.toString(Thread.currentThread().getId()));
 		}
 
 		@Override
 		protected String doInBackground(String... args) {
 			// Check for success tag
 			Log.d("I am in ", "doInBackground Function");
+			Log.d("THREADTEST","BACKGROUND=>"+Long.toString(Thread.currentThread().getId()));
 			
 			if(!isNetworkAvailable()) {
 	    		cancel(true);
@@ -126,15 +132,18 @@ public class Quote extends Activity {
 		 * **/
 		protected void onPostExecute(String file_url) {
 			// dismiss the dialog once product deleted
+			Log.d("THREADTEST","POST=>"+Long.toString(Thread.currentThread().getId()));
 			pDialog.dismiss();
 			try {  /*  quotesJsonArray.getJSONObject(0).getString("company_id").equalsIgnoreCase("getfalse")  */
 				if(jsonResult.getString("success").equalsIgnoreCase("1")) {
 					String quotesString = jsonResult.getString("quotes");
 					//JSONObject quoteDetails = new JSONObject(jsonResult.getString("company_id"));
 					quotesJsonArray = new JSONArray(quotesString);
-					int i;
+					
+					
 					int arrayLength = quotesJsonArray.length();
 					for(i=0;i<arrayLength;i++) {
+						final int j=i;
 						LinearLayout childLinearLayout = new LinearLayout(getApplicationContext());
 				        childLinearLayout.setOrientation(LinearLayout.HORIZONTAL);
 				        childLinearLayout.setPadding(0, 5, 0, 5);
@@ -174,9 +183,39 @@ public class Quote extends Activity {
 				        LinearLayout.LayoutParams param3 = new LinearLayout.LayoutParams(
 				                0,LayoutParams.MATCH_PARENT, 30);
 				        acceptBtn.setLayoutParams(param3);
-				        companyFare.setPadding(0, 0, 0, 5);
+				        acceptBtn.setPadding(0, 0, 0, 5);
+				        acceptBtn.setId(Integer.parseInt(quotesJsonArray.getJSONObject(i).getString("company_request_id")));
 				        acceptBtn.setBackgroundResource(R.drawable.a15);
 				        childLinearLayout.addView(acceptBtn);
+				        
+				        acceptBtn.setOnClickListener(new View.OnClickListener() {
+				            public void onClick(View v) {
+				                
+				            	try {
+									Toast.makeText(Quote.this, String.valueOf(
+											Integer.parseInt(quotesJsonArray.getJSONObject(j).
+													getString("company_request_id"))), 
+													Toast.LENGTH_LONG).show();
+								} catch (NumberFormatException e) {
+									e.printStackTrace();
+								} catch (JSONException e) {
+									e.printStackTrace();
+								}
+				            	
+				            	
+				            	Intent intent = new Intent(Quote.this,ConfirmFare.class);
+				                try {
+									intent.putExtra("company_request_id", 
+											quotesJsonArray.getJSONObject(j).
+											getString("company_request_id"));
+								} catch (NumberFormatException e1) {
+									e1.printStackTrace();
+								} catch (JSONException e1) {
+									e1.printStackTrace();
+								}
+				                startActivity(intent);
+				            }
+				          });
 					}
 				}
 			} catch(JSONException e) {

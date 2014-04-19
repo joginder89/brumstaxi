@@ -1,59 +1,78 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/background"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context=".MainActivity" >
+    tools:context=".MainActivity" 
+    android:orientation="vertical"
+    android:weightSum="1">
 
     <LinearLayout
         android:id="@+id/contentBody"
-        android:layout_width="fill_parent"
-        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        android:layout_height="0dip"
         android:layout_centerHorizontal="true"
         android:padding="25dp"
         android:weightSum="100"
+        android:layout_weight=".88"
         android:orientation="vertical" >
         
         <TextView
 	        android:id="@+id/tvNeedTaxi"
-	        android:layout_width="wrap_content"
-	        android:layout_height="0dp"
+	        android:layout_width="match_parent"
+	        android:layout_height="0dip"
 	        android:layout_weight="7"
 	        android:textColor="@color/yellowColor"
-	        android:layout_gravity="center_horizontal"
+	        android:gravity="center_horizontal"
 	        android:textSize="@dimen/needTaxiSize"
 	        android:text="@string/need_taxi" />
         
         <TextView
             android:id="@+id/tvTiredOfWaiting"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="10"
+            android:layout_weight="5"
+            android:layout_marginTop="3dip"
             android:textSize="@dimen/tiredOfWaitingSize"
             android:layout_gravity="center_horizontal"
             android:text="@string/tired_of_waiting"
-            android:textColor="@color/whiteColor" />
+            android:textColor="@color/whiteColor" 
+            android:gravity="center_horizontal"/>
         
-        <Button
+        <RelativeLayout
             android:id="@+id/Logo"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="13"
+            android:layout_marginTop="15dip"
+            android:layout_weight="20"
             android:contentDescription="@string/logodesc"
-            android:background="@drawable/logoi" />
+            android:background="@drawable/logo" >
+            
+            <TextView 
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentRight="true"
+                android:text="driving you in and around birmingham safely"
+                android:textColor="@android:color/white"
+                android:layout_marginBottom="3dip"
+                android:layout_marginRight="13dip"
+                android:textSize="@dimen/tiredOfWaitingSize"/>
+            
+        </RelativeLayout>
        
        <TextView
             android:layout_width="wrap_content"
             android:layout_height="0dp"
-            android:layout_weight="3"
+            android:layout_weight="5"
             android:layout_gravity="center_horizontal" />
         
         <Button
             android:id="@+id/bookATaxiButton"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="10"
+            android:layout_weight="12"
             android:background="@drawable/book_taxi" />
         
         <TextView
@@ -66,8 +85,7 @@
             android:id="@+id/myJourneysButton"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="10"
-            
+            android:layout_weight="12"
             android:background="@drawable/my_journey" />
         
         <TextView
@@ -80,23 +98,26 @@
             android:id="@+id/LoginButton"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="10"
+            android:layout_weight="12"
             android:background="@drawable/login" />
         
         <Button
             android:id="@+id/registrationButton"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="10"
+            android:layout_weight="12"
             android:background="@drawable/register" />
+       
 
     </LinearLayout>
-    
-    <Button
+     <Button
         android:id="@+id/callUsButton"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/bookTaxiHeaderHeight"
+        android:layout_height="0dip"
         android:layout_alignParentBottom="true"
+        android:layout_weight=".125"
+        android:layout_gravity="bottom"
         android:background="@drawable/call_us" />
+    
 
-</RelativeLayout>
+</LinearLayout>
