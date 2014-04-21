@@ -8,6 +8,7 @@ import org.json.JSONObject;
 
 import com.anaadih.brumstaxi.library.UserFunctions;
 
+import android.media.Image;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
@@ -18,10 +19,17 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.ViewGroup.LayoutParams;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.BaseAdapter;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -34,7 +42,8 @@ public class Quote extends Activity {
 		TextView qtDateTimeValue;
 		TextView qtPassengerValue;
 		TextView qtLuggageValue;
-		LinearLayout parentLayout;
+		ListView listview_company;
+		//LinearLayout parentLayout;
 		
 		
 	  	private ProgressDialog pDialog;
@@ -81,9 +90,10 @@ public class Quote extends Activity {
 		qtDateTimeValue=(TextView)findViewById(R.id.qtDateTimeValue);
 		qtPassengerValue=(TextView)findViewById(R.id.qtPassengerValue);
 		qtLuggageValue=(TextView)findViewById(R.id.qtLuggageValue);
+		listview_company=(ListView) findViewById(R.id.listview_company);
 		
 		// Parent layout
-        parentLayout = (LinearLayout)findViewById(R.id.companyQuoteBody);
+        //parentLayout = (LinearLayout)findViewById(R.id.companyQuoteBody);
         
         
 	}
@@ -142,81 +152,39 @@ public class Quote extends Activity {
 					
 					
 					int arrayLength = quotesJsonArray.length();
-					for(i=0;i<arrayLength;i++) {
-						final int j=i;
-						LinearLayout childLinearLayout = new LinearLayout(getApplicationContext());
-				        childLinearLayout.setOrientation(LinearLayout.HORIZONTAL);
-				        childLinearLayout.setPadding(0, 5, 0, 5);
-				        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
-				        		LayoutParams.MATCH_PARENT, 
-				        		LayoutParams.WRAP_CONTENT				                
-				        );
-				        params.setMargins(0, 0, 0, 10);
-				        childLinearLayout.setLayoutParams(params);
-				        childLinearLayout.setBackgroundResource(R.color.mainColor);
-				        childLinearLayout.setBaselineAligned(false);
-				        childLinearLayout.setWeightSum(100);
-				        parentLayout.addView(childLinearLayout);
-				        
-				        TextView companyName= new TextView(getApplicationContext());
-				        LinearLayout.LayoutParams param1 = new LinearLayout.LayoutParams(
-				                0,LayoutParams.MATCH_PARENT, 50);
-				        companyName.setLayoutParams(param1);
-				        companyName.setTextSize(20);
-				        companyName.setPadding(5, 5, 0, 0);
-				        companyName.setTextColor(getResources().getColor(R.color.whiteColor));
-				        companyName.setText(quotesJsonArray.getJSONObject(i).getString("company"));
-				        childLinearLayout.addView(companyName);
-				        
-				        TextView companyFare= new TextView(getApplicationContext());
-				        LinearLayout.LayoutParams param2 = new LinearLayout.LayoutParams(
-				                0,LayoutParams.MATCH_PARENT, 20);
-				        companyFare.setLayoutParams(param2);
-				        companyFare.setPadding(0, 5, 0, 0);
-				        companyFare.setTextColor(getResources().getColor(R.color.whiteColor));
-				        companyFare.setTextSize(20);
-				        companyFare.setText(quotesJsonArray.getJSONObject(i).getString("company_fare_amount"));
-				        childLinearLayout.addView(companyFare);
-				        
-				        Button acceptBtn = new Button(getApplicationContext());
-				        acceptBtn.setLayoutParams(new LayoutParams(0, 50));
-				        LinearLayout.LayoutParams param3 = new LinearLayout.LayoutParams(
-				                0,LayoutParams.MATCH_PARENT, 30);
-				        acceptBtn.setLayoutParams(param3);
-				        acceptBtn.setPadding(0, 0, 0, 5);
-				        acceptBtn.setId(Integer.parseInt(quotesJsonArray.getJSONObject(i).getString("company_request_id")));
-				        acceptBtn.setBackgroundResource(R.drawable.a15);
-				        childLinearLayout.addView(acceptBtn);
-				        
-				        acceptBtn.setOnClickListener(new View.OnClickListener() {
-				            public void onClick(View v) {
-				                
-				            	try {
-									Toast.makeText(Quote.this, String.valueOf(
-											Integer.parseInt(quotesJsonArray.getJSONObject(j).
-													getString("company_request_id"))), 
-													Toast.LENGTH_LONG).show();
-								} catch (NumberFormatException e) {
-									e.printStackTrace();
-								} catch (JSONException e) {
-									e.printStackTrace();
+					if(arrayLength>0){
+						Log.e("Anurag Company  Adapter called", "Starting ");
+						CompanyList companyList=new CompanyList();
+						listview_company.setAdapter(companyList);
+						listview_company.setOnItemClickListener(new OnItemClickListener() {
+
+							@Override
+							public void onItemClick(AdapterView<?> arg0,
+									View arg1, int arg2, long arg3) {
+								// TODO Auto-generated method stub
+								JSONObject jsonObject;
+								String comapny="";
+								String price="";
+								if(quotesJsonArray!=null){
+									try {
+										Log.e("Quote", "First");
+										jsonObject=(JSONObject) quotesJsonArray.get(arg2);
+										comapny=jsonObject.getString("company");
+								        price=jsonObject.getString("company_fare_amount");
+								        Log.e("Quote", "First"+comapny+price);
+									} catch (JSONException e) {
+										// TODO Auto-generated catch block
+										e.printStackTrace();
+									}
 								}
-				            	
-				            	
-				            	Intent intent = new Intent(Quote.this,ConfirmFare.class);
-				                try {
-									intent.putExtra("company_request_id", 
-											quotesJsonArray.getJSONObject(j).
-											getString("company_request_id"));
-								} catch (NumberFormatException e1) {
-									e1.printStackTrace();
-								} catch (JSONException e1) {
-									e1.printStackTrace();
-								}
-				                startActivity(intent);
-				            }
-				          });
+								Intent intent=new Intent(Quote.this, ConfirmFare.class);
+								intent.putExtra("company", comapny);
+								intent.putExtra("price", price);
+								startActivity(intent);
+							}
+						});
 					}
+	
 				}
 			} catch(JSONException e) {
 				Log.e("JSON in Adding Quote","JSONException");
@@ -242,5 +210,56 @@ public class Quote extends Activity {
 		java.util.Date df = new java.util.Date(dv);
 		String vv = new SimpleDateFormat("MMMM dd, hh:mm a").format(df);
 		return vv;
+	}
+	
+	private class CompanyList extends BaseAdapter{
+
+		@Override
+		public int getCount() {
+			// TODO Auto-generated method stub
+			Log.e("Anurag Company  Adapter called", "count ");
+			return quotesJsonArray.length();
+		}
+
+		@Override
+		public JSONArray getItem(int position) {
+			// TODO Auto-generated method stub
+			
+			return null;
+		}
+
+		@Override
+		public long getItemId(int position) {
+			// TODO Auto-generated method stub
+			return position;
+		}
+
+		@Override
+		public View getView(int position, View convertView, ViewGroup parent) {
+			LayoutInflater inflater = getLayoutInflater();
+			JSONObject jsonObject;
+			View row;
+            row = inflater.inflate(R.layout.quotes_item, parent, false);
+            TextView title, price;
+            ImageView i1;
+            title = (TextView) row.findViewById(R.id.textView_company);
+            price = (TextView) row.findViewById(R.id.text_price);
+            i1=(ImageView)row.findViewById(R.id.button_accept);
+			try {
+				jsonObject = quotesJsonArray.getJSONObject(position);
+				  title.setText(jsonObject.getString("company"));
+		            price.setText(jsonObject.getString("company_fare_amount"));
+			} catch (JSONException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+            
+            
+			Log.e("Anurag Company  Adapter called", "view ");
+            
+
+            return (row);
+		}
+		
 	}
 }

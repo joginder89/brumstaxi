@@ -45,4 +45,7 @@
     <string name="qt_luggage">Luggage:</string>
     <string name="qt_company">Company</string>
     <string name="qt_fare">Fare</string>
+    
+    <string name="qt_con_fare">Conform Fare</string>
+     <string name="qt_con_fare_you">you have chosen</string>
 </resources>

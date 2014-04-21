@@ -18,6 +18,7 @@ public class UserFunctions {
 	private static String loginURL = "http://hrm.testserver87.com/brumstaxi/index.php";
 	private static String getQuoteURL = "http://hrm.testserver87.com/brumstaxi/getquote.php";
 	private static String fetchQuoteDataURL = "http://hrm.testserver87.com/brumstaxi/fetchquotedata.php";
+	private static String fetchJourneyURL = "http://hrm.testserver87.com/brumstaxi/getmyjourneydata.php";
 	
 	private static String login_tag = "login";
 	private static String register_tag = "register";
@@ -98,6 +99,18 @@ public class UserFunctions {
         nameValuePairs.add(new BasicNameValuePair("userRequestId", userRequestId));  
 		JSONObject json = jsonParser.getJSONFromUrl(fetchQuoteDataURL, nameValuePairs);
 		Log.d("fetchQuoteDataJSON=>", json.toString());
+		return json;
+	}
+	
+	public JSONObject getMyJourneyData(String userId) {
+		
+		List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
+		
+        nameValuePairs.add(new BasicNameValuePair("userId", userId));  
+		
+        JSONObject json = jsonParser.getJSONFromUrl(fetchJourneyURL, 
+        		nameValuePairs);
+		Log.d("fetchedJourneyJSON=>", json.toString());
 		return json;
 	}
 	

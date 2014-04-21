@@ -11,4 +11,6 @@
 	<dimen name="bTaxiPaddingTop">16dp</dimen>
 	<dimen name="bTaxiCommentHeight">48dp</dimen>
 	<dimen name="bTaxiDateTimeTextSize">18sp</dimen>
+	<dimen name="mjAboveHeaderGap">18dp</dimen>
+	<dimen name="mjRelTopGap">36dp</dimen>
 </resources>

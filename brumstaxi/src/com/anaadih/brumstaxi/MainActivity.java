@@ -124,7 +124,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
     			contentBody.removeView(LoginButton);
     		}
     		
-    		playAudio();
+    		//playAudio();
     		
         } else {
             Log.i(TAG, "No valid Google Play Services APK found.");
@@ -164,7 +164,6 @@ public class MainActivity extends Activity implements View.OnClickListener {
     
     @Override
 	public void onClick(View v) {
-		// TODO Auto-generated method stub
 		if(regid != null) {
 	    	switch(v.getId()){
 				case R.id.bookATaxiButton:
@@ -206,7 +205,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
 	}
     
     public void goToMyJourneyPage() {
-    	Intent intent = new Intent(this,RegistrationResponse.class);
+    	Intent intent = new Intent(this,MyJourney.class);
          startActivity(intent);
 	}
     
