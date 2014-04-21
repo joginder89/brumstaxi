@@ -57,11 +57,11 @@ public class Booktaxi extends Activity implements View.OnClickListener,OnItemCli
 	static final int TIME_DIALOG_ID=1;
 	public  int year,month,day,hour,minute,second=00;  
 	public  int yearSelected,monthSelected,daySelected,hourSelected,minuteSelected;
-	private int mYear, mMonth, mDay,mHour,mMinute; 
+	private int mYear, mMonth, mDay,mHour,mMinute;
+	JSONObject jsonResult;
 	
 	// JSON Response node names
-			private static String KEY_SUCCESS = "success";
-			private static String KEY_ERROR_MSG = "error_msg";
+			private static String KEY_SUCCESS = "success";			
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -87,6 +87,13 @@ public class Booktaxi extends Activity implements View.OnClickListener,OnItemCli
 		layoutSelectTime.setOnClickListener(this);
 		lauoutPassengers.setOnClickListener(this);
 		layoutLuggage.setOnClickListener(this);
+		
+		if( getIntent().getExtras() != null) {
+			String pickUpFromString = getIntent().getExtras().getString("pickUpFromString");
+			String dropOffAtString = getIntent().getExtras().getString("dropOffAtString");
+			pickUpFrom.setText(pickUpFromString);
+			dropOffTo.setText(dropOffAtString);
+		}
 		
 		pickUpFrom.setAdapter(new PlacesAutoCompleteAdapter(this, R.layout.list_item));
         pickUpFrom.setOnItemClickListener(this);
@@ -122,7 +129,6 @@ public class Booktaxi extends Activity implements View.OnClickListener,OnItemCli
 		layoutSelectTime = (LinearLayout) findViewById (R.id.layoutSelectTime);
 		lauoutPassengers = (LinearLayout) findViewById (R.id.lauoutPassengers);
 		layoutLuggage = (LinearLayout) findViewById (R.id.layoutLuggage);
-		
 		
 		final Calendar c = Calendar.getInstance();
         mYear = c.get(Calendar.YEAR);
@@ -205,6 +211,7 @@ public class Booktaxi extends Activity implements View.OnClickListener,OnItemCli
 		 * Before starting background thread Show Progress Dialog
 		 * */
 		boolean failure = false;
+		
 
 		@Override
 		protected void onPreExecute() {
@@ -219,7 +226,6 @@ public class Booktaxi extends Activity implements View.OnClickListener,OnItemCli
 		@Override
 		protected String doInBackground(String... args) {
 			
-			Log.d("Function", "doInBackgroundStart");
 			final Calendar calendar = Calendar.getInstance();
 			calendar.set(year,month,day,hour,minute,second);
 			long startTime = calendar.getTimeInMillis()/1000;
@@ -233,48 +239,30 @@ public class Booktaxi extends Activity implements View.OnClickListener,OnItemCli
 			String pickupTimestamp = Long.toString(startTime);
 			int noOfPassengers=Integer.getInteger(noOfPassangers);
 			int noOfLuggages=Integer.getInteger(noOfLuggage);
-			
 			UserFunctions userFunction = new UserFunctions();
 			
-			JSONObject json = userFunction.getQuote(userId,pickUpFromValue,
+			jsonResult = userFunction.getQuote(userId,pickUpFromValue,
 					dropOffToValue,bookTaxiCommentValue,pickupTimestamp,
 					noOfPassengers,noOfLuggages);
-			Log.d("TextBookingDataAtBooktaxi",userId+"="+pickUpFromValue+"="+pickupTimestamp+"="+String.valueOf(noOfPassengers));
-			// check for login response
+			return null;
+		}
+		
+		protected void onPostExecute(String file_url) {
+			pDialog.dismiss();
+			Log.d("ReceiveResult",jsonResult.toString());
 			try {
-				if(json.getString(KEY_SUCCESS) != null) {
-					String res = json.getString(KEY_SUCCESS); 
+				if(jsonResult.getString(KEY_SUCCESS) != null) {
+					String res = jsonResult.getString(KEY_SUCCESS); 
 					if(Integer.parseInt(res) == 1) {
-						// Launch Dashboard Screen
 						Intent dashboard = new Intent(getApplicationContext(), MainActivity.class);
-						
-						// Close all views before launching Dashboard
 						dashboard.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 						startActivity(dashboard);
 						finish();
-					} else {
-						pDialog.dismiss();
-						Log.d("KEY_ERROR",json.getString(KEY_ERROR_MSG));
-						Toast.makeText(getApplicationContext(),json.getString("Service Down=>"+KEY_ERROR_MSG),
-									   Toast.LENGTH_LONG).show();
-					}
-				} else {
-						pDialog.dismiss();
-						Log.d("JSON","Wrong JSON");
-						Toast.makeText(getApplicationContext(),"Worng JSON",
-							   Toast.LENGTH_LONG).show();
-				}
+					} 
+				} 
 			} catch (JSONException e) {
 				e.printStackTrace();
 			}
-			return null;
-		}
-		/**
-		 * After completing background task Dismiss the progress dialog
-		 * **/
-		protected void onPostExecute(String file_url) {
-			// dismiss the dialog once product deleted
-			pDialog.dismiss();
 		}
 	}
 	

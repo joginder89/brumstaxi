@@ -100,12 +100,7 @@ public class MyJourney extends Activity{
 						Log.e("MyJourney", "Starting");
 						CreateMyJourneyBlock journeyBlockObj = new CreateMyJourneyBlock();
 						listview_journeyblock.setAdapter(journeyBlockObj);
-						
-						
 						listview_journeyblock.setOnItemClickListener(itemClickListener1);
-						
-						
-						
 					}
 				}
 			} catch(Exception e) {
@@ -114,7 +109,6 @@ public class MyJourney extends Activity{
 		}
 	}
 	OnItemClickListener itemClickListener1=new OnItemClickListener() {
-
 		@Override
 		public void onItemClick(AdapterView<?> parent, View view, int position,
 				long id) {
@@ -135,10 +129,9 @@ public class MyJourney extends Activity{
 					e.printStackTrace();
 				}
 			}
-			Intent intent=new Intent(MyJourney.this, RegistrationResponse.class);
-			/*intent.putExtra("pickUpFromString", pickUpFromString);
+			Intent intent=new Intent(MyJourney.this, Booktaxi.class);
+			intent.putExtra("pickUpFromString", pickUpFromString);
 			intent.putExtra("dropOffAtString", dropOffAtString);
-			intent.putExtra("journeyFare", journeyFare);*/
 			startActivity(intent);
 		}
 	};

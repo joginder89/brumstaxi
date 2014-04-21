@@ -10,12 +10,11 @@
         android:descendantFocusability="blocksDescendants"
         android:id="@+id/info1"
     >
-  
     <TextView 
        android:id="@+id/pickupview"
        android:layout_width="290dp"
        android:layout_height="wrap_content"
-       android:text="Pick up from:"
+       android:text="@string/mjpick_up_from"
        android:layout_marginLeft="10dp"
        android:layout_marginTop="15dp"
        android:textColor="@color/whiteColor"
@@ -37,7 +36,7 @@
        android:id="@+id/dropoffview"
        android:layout_width="290dp"
        android:layout_height="wrap_content"
-       android:text="Drop off at:"
+       android:text="@string/mjdrop_off_at"
        android:layout_below="@id/pickfrom"
        android:layout_marginLeft="10dp"
        android:layout_marginTop="5dp"

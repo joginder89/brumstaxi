@@ -48,4 +48,8 @@
     
     <string name="qt_con_fare">Conform Fare</string>
      <string name="qt_con_fare_you">you have chosen</string>
+     
+     <!-- My journey -->
+     <string name="mjpick_up_from">Pick Up From:</string>
+     <string name="mjdrop_off_at">Drop Off at:</string>
 </resources>

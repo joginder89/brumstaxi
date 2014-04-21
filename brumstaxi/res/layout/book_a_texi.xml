@@ -121,9 +121,9 @@
                             android:layout_width="wrap_content"
                             android:layout_height="fill_parent"
                             android:gravity="center"
+                            android:layout_gravity="center"
                             />
-                 </LinearLayout>
-                 
+                 </LinearLayout> 
                  <LinearLayout
                         android:id="@+id/layoutSelectTime"
                         android:layout_width="0dp"
@@ -145,9 +145,10 @@
                             android:id="@+id/bookTaxiTime"
                             android:textColor="@color/regTextField"
                             android:textSize="17sp"
-                            android:layout_width="fill_parent"
+                            android:layout_width="wrap_content"
                             android:layout_height="fill_parent"
                             android:gravity="center"
+                            android:layout_gravity="center"
                             />
                  </LinearLayout>
                  
@@ -163,7 +164,7 @@
                             android:id="@+id/bookTaxiPassengersLabel"
                             android:textColor="@color/blackColor"
                             android:text="@string/passengers"
-                             android:textSize="@dimen/bTaxiDateTimeTextSize"
+                            android:textSize="@dimen/bTaxiDateTimeTextSize"
                             android:layout_gravity="center"
                             android:gravity="center"
                             android:layout_width="wrap_content"
@@ -173,7 +174,10 @@
                             android:id="@+id/bookTaxiPassengers"
                             android:layout_width="wrap_content"
                             android:layout_gravity="center"
-                            android:layout_height="wrap_content" />
+                            android:textColor="@color/regTextField"
+                            android:textSize="17sp"
+                            android:gravity="center"
+                            android:layout_height="fill_parent" />
                  </LinearLayout>
                 
                  <LinearLayout
@@ -196,8 +200,11 @@
                         <TextView
                             android:id="@+id/bookTaxiLuggage"
                             android:layout_gravity="center"
+                            android:textColor="@color/regTextField"
+                            android:textSize="17sp"
+                            android:gravity="center"
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content" />
+                            android:layout_height="fill_parent" />
                  </LinearLayout>
                  
         </LinearLayout>

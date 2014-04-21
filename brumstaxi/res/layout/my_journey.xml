@@ -4,42 +4,44 @@
     android:layout_height="fill_parent"
     android:background="@drawable/background"
     android:id="@+id/relativemain1" >
-          
-   <RelativeLayout 
+    <RelativeLayout 
 	    android:layout_width="fill_parent"
-	    android:layout_height="fill_parent"
+	    android:layout_height="wrap_content"
 	    android:background="#FFFFFF"
 	    android:layout_marginLeft="20dp"
 	    android:layout_marginRight="20dp"
-	    android:layout_marginBottom="10dp"
-	    android:id="@+id/relativemain"
-    >
-     <ScrollView
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/journeyScrollView"
-     >
-    <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_marginTop="@dimen/bookTaxiHeaderHeight"
-        android:descendantFocusability="blocksDescendants"
-     >
-        <ListView 
-           android:id="@+id/listview_journeyblock"
+	    android:id="@+id/relativemain" >
+	    <TextView
+	        android:layout_height="wrap_content"
+	        android:layout_width="wrap_content"
+	        android:layout_marginTop="@dimen/bookTaxiHeaderHeight"
+	        android:id="@+id/gapuse"
+	        android:orientation="horizontal"
+	        />
+         <ListView
+            android:id="@+id/listview_journeyblock"
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-        ></ListView>
-    </LinearLayout>
-    </ScrollView>  
-   </RelativeLayout>
-   
-   <RelativeLayout
-    android:layout_width="fill_parent"
-    android:layout_height="@dimen/bookTaxiHeaderHeight"
-    android:background="@drawable/a8"
-    android:layout_marginTop="@dimen/mjAboveHeaderGap"
-    android:id="@+id/headrer_view" />
+            android:layout_below="@+id/gapuse"
+            android:layout_marginTop="@dimen/mjAboveHeaderGap"
+            android:layout_marginBottom="@dimen/bookTaxiHeaderHeight"
+            android:layout_height="wrap_content" />
+         
+         <Button
+	        android:id="@+id/homePageBtn"
+	        android:layout_width="140dip"
+	        android:layout_height="@dimen/bookTaxiHeaderHeight"
+	        android:layout_alignParentBottom="true"
+	        android:layout_centerHorizontal="true"
+	        android:background="@drawable/home"
+	        android:layout_marginTop="@dimen/mjRelTopGap"
+	        android:layout_marginBottom="5dip" />
+    </RelativeLayout>
+
+   <Button
+	    android:layout_width="fill_parent"
+	    android:layout_height="@dimen/bookTaxiHeaderHeight"
+	    android:background="@drawable/a8"
+	    android:layout_marginTop="@dimen/mjAboveHeaderGap"
+	    android:layout_alignParentTop="true"
+	    android:id="@+id/headrer_view" />
 </RelativeLayout>
