@@ -220,7 +220,9 @@ public class Booktaxi extends Activity implements View.OnClickListener,OnItemCli
 			pDialog.setMessage("Sending Information...");
 			pDialog.setIndeterminate(false);
 			pDialog.setCancelable(true);
-			pDialog.show();
+			if(!pDialog.isShowing()){
+				pDialog.show();
+			}
 		}
 
 		@Override
@@ -237,18 +239,21 @@ public class Booktaxi extends Activity implements View.OnClickListener,OnItemCli
 			String dropOffToValue=dropOffTo.getText().toString();
 			String bookTaxiCommentValue=bookTaxiComment.getText().toString();
 			String pickupTimestamp = Long.toString(startTime);
-			int noOfPassengers=Integer.getInteger(noOfPassangers);
-			int noOfLuggages=Integer.getInteger(noOfLuggage);
+			String noOfPassengers=noOfPassangers;
+			String noOfLuggages=noOfLuggage;
 			UserFunctions userFunction = new UserFunctions();
 			
-			jsonResult = userFunction.getQuote(userId,pickUpFromValue,
-					dropOffToValue,bookTaxiCommentValue,pickupTimestamp,
-					noOfPassengers,noOfLuggages);
+			jsonResult = userFunction.getQuote(userId,pickUpFromValue,dropOffToValue,bookTaxiCommentValue,
+					pickupTimestamp,noOfPassengers,noOfLuggages);
+			
 			return null;
 		}
 		
 		protected void onPostExecute(String file_url) {
-			pDialog.dismiss();
+			if(pDialog!=null&&pDialog.isShowing()){
+				pDialog.dismiss();
+			}
+		
 			Log.d("ReceiveResult",jsonResult.toString());
 			try {
 				if(jsonResult.getString(KEY_SUCCESS) != null) {

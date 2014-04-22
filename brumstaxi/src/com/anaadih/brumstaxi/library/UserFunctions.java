@@ -73,7 +73,7 @@ public class UserFunctions {
 	
 	public JSONObject getQuote(String userId,String pickUpFromValue, String dropOffToValue, 
 			String bookTaxiCommentValue,String pickupTimestamp,
-			int noOfPassengers,int noOfLuggage) {
+			String noOfPassengers,String noOfLuggage) {
 		
 		List<NameValuePair> params = new ArrayList<NameValuePair>();
 		params.add(new BasicNameValuePair("userId", userId));
@@ -81,8 +81,8 @@ public class UserFunctions {
 		params.add(new BasicNameValuePair("dropOffToValue", dropOffToValue));
 		params.add(new BasicNameValuePair("bookTaxiComment", bookTaxiCommentValue));
 		params.add(new BasicNameValuePair("pickupTimestamp", pickupTimestamp));
-		params.add(new BasicNameValuePair("noOfPassengers", String.valueOf(noOfPassengers)));
-		params.add(new BasicNameValuePair("noOfLuggage", String.valueOf(noOfLuggage)));
+		params.add(new BasicNameValuePair("noOfPassengers", noOfPassengers));
+		params.add(new BasicNameValuePair("noOfLuggage", noOfLuggage));
 		
 		// getting JSON Object
 		

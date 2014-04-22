@@ -40,7 +40,16 @@ public class MyJourney extends Activity{
 		setContentView(R.layout.my_journey);
 		
 		Initializer();
-		new getMyJourney().execute();
+		sharedpreferences=getSharedPreferences(MyPREFERENCES, 
+			      Context.MODE_PRIVATE);
+		if(sharedpreferences.contains("userId")){
+			new getMyJourney().execute();
+		}
+		else{
+			Intent intent = new Intent(this,Register.class);
+	        startActivity(intent);
+	        finish();
+		}
 	}
 	
 	public void Initializer() {
@@ -64,8 +73,7 @@ public class MyJourney extends Activity{
 
 		@Override
 		protected String doInBackground(String... params) {
-			sharedpreferences=getSharedPreferences(MyPREFERENCES, 
-  			      Context.MODE_PRIVATE);
+			
 			if(sharedpreferences.contains("userId")) {
 				userId = sharedpreferences.getString("userId", "");
 				Log.d("is userId","Yes");
@@ -75,22 +83,16 @@ public class MyJourney extends Activity{
 				json = userFunction.getMyJourneyData(userId);
 				Log.d("MyJourneyData",json.toString());
     		}
-    		else if(!sharedpreferences.contains("userId")) {
-    			Log.d("is userId","No");
-				Toast.makeText(getApplicationContext(),"is userId==>No",
-							   Toast.LENGTH_LONG).show();
-				
-    		}
-    		else {
-    			Log.d("is userId","There is some Locha");
-    		}
-			
+    		
 			return null;
 		}
 		
 		@Override
 		protected void onPostExecute(String file_url) {
-			pDialog.dismiss();
+			if(pDialog!=null&&!pDialog.isShowing()){
+				pDialog.dismiss();
+			}
+			
 			try {
 				if(json.getString("success").equalsIgnoreCase("1")) {
 					String journeyDataString = json.getString("journeyData");

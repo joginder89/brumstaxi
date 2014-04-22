@@ -35,7 +35,7 @@ public class Register extends Activity implements View.OnClickListener {
 	public static final String MyPREFERENCES = "BrumsTaxiPrefs" ;
     public String userId;
     SharedPreferences sharedpreferences;
-	
+    String registrationId;
 	//Context context = getApplicationContext();
 	
 	@Override
@@ -90,7 +90,8 @@ public class Register extends Activity implements View.OnClickListener {
 	}
 	
 	class AttemptRegister extends AsyncTask<String, String, String> {
-
+         boolean isError=false; 
+         String message="";
 		/**
 		 * Before starting background thread Show Progress Dialog
 		 * */
@@ -99,36 +100,19 @@ public class Register extends Activity implements View.OnClickListener {
 		@Override
 		protected void onPreExecute() {
 			super.onPreExecute();
-			pDialog = new ProgressDialog(Register.this);
-			pDialog.setMessage("Attempting Register...");
-			pDialog.setIndeterminate(false);
-			pDialog.setCancelable(true);
-			pDialog.show();
-		}
-
-		@Override
-		protected String doInBackground(String... args) {
-			// TODO Auto-generated method stub
-			// Check for success tag
-			Log.d("I am in ", "doInBackground Function");
+			
 			SharedPreferences prefs = 
 					getSharedPreferences(MainActivity.class.getSimpleName(), MODE_PRIVATE);
-	        String registrationId = prefs.getString("registration_id", "");
-	        String email = UserInfo.getEmail(getApplicationContext());
-	    	
-	    	if(email == null) {
-	    		email="user not register with Google";
-	    	}
-			
-	    	if(registrationId == "") {
+			registrationId = prefs.getString("registration_id", "");
+	        if(registrationId == "") {
 	    		try {
-		    		pDialog.dismiss();
+		    		
 					Log.e("DeviceKey","Device Not Registered");
 					Toast.makeText(getApplicationContext(),"Service Not Available",
 								   Toast.LENGTH_LONG).show();
 					AlertDialog.Builder builder = new AlertDialog.Builder(Register.this);
-		            builder.setTitle("Attention!");
-		            builder.setMessage("Connection to Server failed.");
+		            builder.setTitle("Device Not Registered!");
+		            builder.setMessage("Please check Internet Connection.");
 		            builder.setPositiveButton("Exit", new DialogInterface.OnClickListener() {
 	
 		            public void onClick(DialogInterface dialog, int which) {
@@ -142,6 +126,29 @@ public class Register extends Activity implements View.OnClickListener {
 	    			e.printStackTrace();
 	    		}
 	    	}
+	        else{
+	        	pDialog = new ProgressDialog(Register.this);
+				pDialog.setMessage("Attempting Register...");
+				pDialog.setIndeterminate(false);
+				pDialog.setCancelable(true);
+				pDialog.show();
+	       }
+			
+		}
+
+		@Override
+		protected String doInBackground(String... args) {
+			// TODO Auto-generated method stub
+			// Check for success tag
+			Log.d("I am in ", "doInBackground Function");
+			
+	        String email = UserInfo.getEmail(getApplicationContext());
+	    	
+	    	if(email == null) {
+	    		email="user not register with Google";
+	    	}
+			
+	    	
 	    	
 			String name=regYourName.getText().toString();
 			String mobile=regMobile.getText().toString();
@@ -158,6 +165,7 @@ public class Register extends Activity implements View.OnClickListener {
 				if(json.getString(KEY_SUCCESS) != null) {
 					String res = json.getString(KEY_SUCCESS); 
 					if(Integer.parseInt(res) == 1) {
+						isError=false;
 						Log.d("Saving UserId=>", json.getString("userId"));
 						  try {
 							  sharedpreferences=getSharedPreferences(MyPREFERENCES, 
@@ -176,13 +184,11 @@ public class Register extends Activity implements View.OnClickListener {
 						    	  Log.d("is userId","Yes");
 						    	  Log.d("userId==>",sharedpreferences.getString("userId", ""));
 						    	  
-									Toast.makeText(getApplicationContext(),"is userId==>Yes",
-												   Toast.LENGTH_LONG).show();
+									
 					    		}
 					    		else if(!sharedpreferences.contains("userId")) {
 					    			 Log.d("is userId","No");
-									Toast.makeText(getApplicationContext(),"is userId==>No",
-												   Toast.LENGTH_LONG).show();
+									
 					    		}
 					    		else {
 					    			Log.d("is userId","There is some Locha");
@@ -193,22 +199,22 @@ public class Register extends Activity implements View.OnClickListener {
 						  }
 						
 					} else {
-						pDialog.dismiss();
+						isError=true;
+						message=json.getString(KEY_ERROR_MSG);
 						Log.d("KEY_ERROR",json.getString(KEY_ERROR));
-						Toast.makeText(getApplicationContext(),json.getString(KEY_ERROR_MSG),
-									   Toast.LENGTH_LONG).show();
+						
 					}
 				} else {
-						pDialog.dismiss();
+					isError=true;
+					message="Worng JSON";
 						Log.d("JSON","Wrong JSON");
-						Toast.makeText(getApplicationContext(),"Worng JSON",
-							   Toast.LENGTH_LONG).show();
+						
 				}
 			} catch (JSONException e) {
-				pDialog.dismiss();
+				isError=true;
+				message="Please try Again";
 				Log.e("JSON","JSONException");
-				Toast.makeText(getApplicationContext(),"Please try Again",
-					   Toast.LENGTH_LONG).show();
+				
 				e.printStackTrace();
 			}
 			return null;
@@ -218,7 +224,13 @@ public class Register extends Activity implements View.OnClickListener {
 		 * **/
 		protected void onPostExecute(String file_url) {
 			// dismiss the dialog once product deleted
-			pDialog.dismiss();
+			if(pDialog!=null&&pDialog.isShowing()){
+				pDialog.dismiss();
+			}
+		    if(isError){
+		    	Toast.makeText(getApplicationContext(), message, 200).show();
+		    	isError=false;
+		    }
 		}
 	}
 	
