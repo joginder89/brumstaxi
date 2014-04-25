@@ -1,0 +1,309 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:whatever="http://schemas.android.com/apk/res-auto"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/bg"
+    android:weightSum="100"
+    android:id="@+id/relativemain1" >
+    
+    
+    <ImageView 
+         android:layout_width="match_parent"
+        android:layout_weight="4"
+        android:layout_height="0dip"
+        android:layout_marginLeft="@dimen/bookTaxiMarginLeft"
+                android:layout_marginRight="@dimen/bookTaxiMarginLeft"
+                android:background="@android:color/white"/>
+    <ImageView
+        android:id="@+id/register_header"
+        android:layout_width="match_parent"
+        android:layout_weight="10"
+        android:layout_height="0dip"
+       android:background="@drawable/a8"
+        />
+    <RelativeLayout 
+	    
+	    android:background="#FFFFFF"
+	  
+	    android:id="@+id/relativemain" 
+	    
+	     android:layout_width="match_parent"
+              android:layout_height="0dip"
+              android:orientation="vertical"
+              android:layout_weight="86"
+              
+             
+              android:layout_marginLeft="@dimen/bookTaxiMarginLeft"
+              android:layout_marginRight="@dimen/bookTaxiMarginLeft"
+	    >
+     
+         <ListView
+            android:id="@+id/listview_journeyblock"
+            android:layout_width="fill_parent"
+           
+            android:layout_height="wrap_content" 
+           
+            android:layout_marginBottom="15dip"
+            android:layout_marginTop="20dip"
+            />
+         
+         
+         
+   </RelativeLayout>
+
+  
+   
+   
+</LinearLayout>
+
+<!-- <?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@drawable/background"
+    android:id="@+id/relativemain1" >
+    
+      
+   <RelativeLayout 
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="#FFFFFF"
+    android:layout_marginLeft="20dp"
+    android:layout_marginRight="20dp"
+    android:layout_marginBottom="10dp"
+    android:id="@+id/relativemain"
+    >
+     <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+         >
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:orientation="vertical"
+         >
+	<RelativeLayout 
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/amit"
+    android:layout_marginTop="70dp"
+    android:layout_marginLeft="4dp"
+    android:layout_marginRight="4dp"
+    android:layout_marginBottom="10dp"
+    android:id="@+id/info1"
+    
+    >
+  
+    
+    <TextView 
+       android:id="@+id/pickupview"
+       android:layout_width="290dp"
+       android:layout_height="wrap_content"
+       android:text="Pick up from:"
+       android:layout_marginLeft="10dp"
+       android:layout_marginTop="15dp"
+       android:textColor="@color/whiteColor"
+       android:textSize="18sp"
+       android:textStyle="bold" 
+     />
+    <TextView
+       android:id="@+id/pickfrom"
+       android:layout_width="290dp"
+       android:layout_height="wrap_content"
+       android:layout_below="@id/pickupview"
+       android:layout_marginLeft="10dp"
+       android:layout_alignParentLeft="true"
+       android:text="New street station"
+       android:textColor="@color/whiteColor"
+       android:textSize="15sp" 
+         />
+    
+    <TextView 
+       android:id="@+id/dropoffview"
+       android:layout_width="290dp"
+       android:layout_height="wrap_content"
+       android:text="Drop off at:"
+       android:layout_below="@id/pickfrom"
+       android:layout_marginLeft="10dp"
+       android:layout_marginTop="5dp"
+       android:textColor="@color/whiteColor"
+       android:textSize="18sp"
+       android:textStyle="bold" 
+     />
+    <TextView
+       android:id="@+id/dropoff"
+       android:layout_width="290dp"
+       android:layout_height="wrap_content"
+       android:layout_below="@id/dropoffview"
+       android:layout_marginLeft="10dp"
+       android:layout_alignParentLeft="true"
+       android:text="126 Townley Gardens, Aston, Birmingham B6 6LR 126 Townley Gardens, Aston, Birmingham B6 6LR "
+       android:textColor="@color/whiteColor"
+       android:textSize="15sp" 
+       />
+    
+    <TextView
+        android:id="@+id/rate"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/dropoff"
+        android:text="$126"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="10dp"
+        android:textColor="@color/whiteColor"
+        android:textSize="25sp" 
+        android:layout_alignParentLeft="true"
+        android:layout_toLeftOf="@+id/viewjob"
+        android:textStyle="bold"
+         />
+    <Button
+        android:id="@+id/viewjob" 
+        android:layout_width="130dp"
+        android:layout_height="45dp"
+        android:layout_alignParentRight="true"
+        android:layout_below="@id/dropoff"
+        android:background="@drawable/a26"
+        android:layout_marginRight="10dp" />
+    
+    <TextView
+        android:id="@+id/nouse"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/viewjob"
+        android:text=""
+        android:layout_alignParentLeft="true"
+         />
+    </RelativeLayout> 
+    
+	<RelativeLayout 
+    android:id="@+id/secondrelative"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/amit"
+    android:layout_marginTop="2dp"
+    android:layout_marginLeft="4dp"
+    android:layout_marginRight="4dp"
+    android:layout_marginBottom="5dp"
+    android:layout_below="@id/info1"
+    android:layout_alignParentLeft="true"
+    >
+    <TextView 
+       android:id="@+id/pickupview1"
+       android:layout_width="290dp"
+       android:layout_height="wrap_content"
+       android:text="Pick up from:"
+       android:layout_marginLeft="10dp"
+       android:layout_marginTop="15dp"
+       android:textColor="@color/whiteColor"
+       android:textSize="18sp" 
+       android:textStyle="bold"
+     />
+    <TextView
+       android:id="@+id/pickfrom1"
+       android:layout_width="290dp"
+       android:layout_height="wrap_content"
+       android:layout_below="@id/pickupview1"
+       android:layout_marginLeft="10dp"
+       android:layout_alignParentLeft="true"
+       android:text="New street station"
+       android:textColor="@color/whiteColor"
+       android:textSize="15sp" 
+         />
+    
+    <TextView 
+       android:id="@+id/dropoffview1"
+       android:layout_width="290dp"
+       android:layout_height="wrap_content"
+       android:text="Drop off at:"
+       android:layout_below="@id/pickfrom1"
+       android:layout_marginLeft="10dp"
+       android:layout_marginTop="5dp"
+       android:textColor="@color/whiteColor"
+       android:textSize="18sp" 
+       android:textStyle="bold"
+     />
+    <TextView
+       android:id="@+id/dropoff1"
+       android:layout_width="290dp"
+       android:layout_height="wrap_content"
+       android:layout_below="@id/dropoffview1"
+       android:layout_marginLeft="10dp"
+       android:layout_alignParentLeft="true"
+       android:text="126 Townley Gardens, Aston, Birmingham B6 6LR"
+       android:textColor="@color/whiteColor"
+       android:textSize="15sp" 
+       />
+    
+    <TextView
+        android:id="@+id/rate1"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/dropoff1"
+        android:text="$126"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="10dp"
+        android:textColor="@color/whiteColor"
+        android:textSize="25sp" 
+        android:layout_alignParentLeft="true"
+        android:layout_toLeftOf="@+id/viewjob1"
+        android:textStyle="bold"
+         />
+    <Button
+        android:id="@+id/viewjob1" 
+        android:layout_width="130dp"
+        android:layout_height="45dp"
+        android:layout_alignParentRight="true"
+        android:layout_below="@id/dropoff1"
+        android:background="@drawable/a26"
+        android:layout_marginRight="10dp" />
+    
+      <TextView
+        android:id="@+id/nouse1"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/viewjob1"
+        android:text=""
+        android:layout_alignParentLeft="true"
+         />
+	    
+    </RelativeLayout>
+    
+	<RelativeLayout 
+    android:id="@+id/thridrelative"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="15dp"
+    android:layout_marginLeft="4dp"
+    android:layout_marginRight="4dp"
+    android:layout_marginBottom="5dp"
+    android:layout_below="@id/secondrelative"
+    android:layout_alignParentLeft="true"
+    >
+    <Button
+        android:id="@+id/main" 
+        android:layout_width="120dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:background="@drawable/a28" />
+      <Button
+        android:id="@+id/next" 
+        android:layout_width="120dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:background="@drawable/a23" />
+	</RelativeLayout>
+	</LinearLayout>
+    </ScrollView>  
+	</RelativeLayout>
+ 
+   <RelativeLayout
+    android:layout_width="fill_parent"
+    android:layout_height="40dp"
+    android:background="@drawable/a8"
+    android:layout_marginTop="18dp"
+    android:id="@+id/headrer_view"
+     >
+    </RelativeLayout>
+</RelativeLayout> -->

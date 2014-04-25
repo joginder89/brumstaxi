@@ -1,0 +1,68 @@
+<resources>
+	<!-- Book a Taxi  -->
+    <dimen name="whiterelativeleft">20dip</dimen>
+    <dimen name="whiterelativeright">20dip</dimen>
+    <dimen name="whiterelativebuttom">10dip</dimen>
+    
+    <dimen name="redboxrelativeleft">4dip</dimen>
+    <dimen name="redboxrelativeright">4dip</dimen>
+    <dimen name="redboxrelativebuttom">10dip</dimen>
+    <dimen name="redboxrelativetop">70dip</dimen>
+    
+    <dimen name="fromtitletextwidth">290dip</dimen>
+    <dimen name="fromtitletextleft">10dip</dimen>
+    <dimen name="fromtitletexttop">15dip</dimen>
+    <dimen name="fromtitletextsize">18sp</dimen>
+    
+    <dimen name="ratetextwidth">80dip</dimen>
+    <dimen name="ratetextleft">170dip</dimen>
+    <dimen name="ratetexttop">10dip</dimen>
+    <dimen name="ratetextsize">30sp</dimen>
+    
+    <dimen name="fromresulttextwidth">290dip</dimen>
+    <dimen name="fromresulttextleft">10dip</dimen>
+    <dimen name="fromresulttextsize">15sp</dimen>
+    
+    <dimen name="droptitletextwidth">290dip</dimen>
+    <dimen name="droptitletextleft">10dip</dimen>
+    <dimen name="droptitletexttop">5dip</dimen>
+    <dimen name="droptitletextsize">18sp</dimen>
+    
+    <dimen name="dropresulttextwidth">290dip</dimen>
+    <dimen name="dropresulttextleft">10dip</dimen>
+    <dimen name="dropresulttextsize">15sp</dimen>
+    
+    <dimen name="conformarrivalwidth">196dip</dimen>
+    <dimen name="conformarrivalgeight">45dip</dimen>
+    <dimen name="conformarrivaltop">10dip</dimen>
+    <dimen name="conformarrivalright">10sp</dimen>
+    
+    <dimen name="buttonrelativeheight">170dip</dimen>
+    <dimen name="buttonrelativeleft">15dip</dimen>
+    <dimen name="buttonrelativebuttom">5dip</dimen>
+    <dimen name="buttonrelativetop">25dip</dimen>
+	<dimen name="buttonrelativeright">15dip</dimen>
+	
+	 <dimen name="pickupedwidth">296dip</dimen>
+	 <dimen name="pickupedright">5dip</dimen>
+	 
+	 <dimen name="notshowwidth">296dip</dimen>
+	 <dimen name="notshowtop">30dip</dimen>
+	 <dimen name="notshowright">5dip</dimen>
+	 
+	<dimen name="bottomrelativetop">5dip</dimen>
+    <dimen name="bottomrelativeleft">15dip</dimen>
+    <dimen name="bottomrelativeright">15dip</dimen>
+    <dimen name="bottomrelativebuttom">5sp</dimen>
+    
+    <dimen name="mainwidth">120dip</dimen>
+    <dimen name="nextwidth">120dip</dimen>
+    <dimen name="logoheight">38dip</dimen>
+    
+    <dimen name="bookTaxiHeaderHeight">45dp</dimen>
+	<dimen name="bookTaxiDateTimeHeight">180dp</dimen>
+	<dimen name="bookTaxiElementSpace">16dip</dimen>
+	<dimen name="bookTaxiMarginLeft">12dip</dimen>
+	<dimen name="mjRelTopGap">18dip</dimen>
+
+</resources>

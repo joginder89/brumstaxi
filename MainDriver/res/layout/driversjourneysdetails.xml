@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:whatever="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/relativemain1"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg"
+    android:orientation="vertical"
+    android:weightSum="100" >
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="0dip"
+        android:layout_marginLeft="@dimen/bookTaxiMarginLeft"
+        android:layout_marginRight="@dimen/bookTaxiMarginLeft"
+        android:layout_weight="4"
+        android:background="@android:color/white" />
+
+    <ImageView
+        android:id="@+id/register_header"
+        android:layout_width="match_parent"
+        android:layout_height="0dip"
+        android:layout_weight="10"
+        android:background="@drawable/a8" />
+
+    <RelativeLayout
+        android:id="@+id/relativemain"
+        android:layout_width="match_parent"
+        android:layout_height="0dip"
+        android:layout_marginLeft="@dimen/bookTaxiMarginLeft"
+        android:layout_marginRight="@dimen/bookTaxiMarginLeft"
+        android:layout_weight="86"
+        android:background="#FFFFFF"
+        android:orientation="vertical" >
+
+        <RelativeLayout
+            android:id="@+id/info1"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/redboxrelativebuttom"
+            android:layout_marginLeft="@dimen/redboxrelativeleft"
+            android:layout_marginRight="@dimen/redboxrelativeright"
+            android:layout_marginTop="15dip"
+            android:background="@drawable/amit" >
+
+            <TextView
+                android:id="@+id/pickupview"
+                android:layout_width="@dimen/fromtitletextwidth"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/fromtitletextleft"
+                android:layout_marginTop="@dimen/fromtitletexttop"
+                android:text="Pick up from:"
+                android:textColor="@color/whiteColor"
+                android:textSize="@dimen/fromtitletextsize"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/rate"
+                android:layout_width="@dimen/ratetextwidth"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/ratetextleft"
+                android:layout_marginTop="@dimen/ratetexttop"
+                android:text="$128"
+                android:textColor="@color/whiteColor"
+                android:textSize="@dimen/ratetextsize"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/pickfrom"
+                android:layout_width="@dimen/fromresulttextwidth"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_below="@id/pickupview"
+                android:layout_marginLeft="@dimen/fromresulttextleft"
+                android:text="New street station"
+                android:textColor="@color/whiteColor"
+                android:textSize="@dimen/fromresulttextsize" />
+
+            <TextView
+                android:id="@+id/dropoffview"
+                android:layout_width="@dimen/droptitletextwidth"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/pickfrom"
+                android:layout_marginLeft="@dimen/droptitletextleft"
+                android:layout_marginTop="@dimen/droptitletexttop"
+                android:text="Drop off at:"
+                android:textColor="@color/whiteColor"
+                android:textSize="@dimen/droptitletextsize"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/dropoff"
+                android:layout_width="290dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_below="@id/dropoffview"
+                android:layout_marginLeft="10dp"
+                android:text="126 Townley Gardens, Aston, Birmingham B6 6LR"
+                android:textColor="@color/whiteColor"
+                android:textSize="15sp" />
+
+            <Button
+                android:id="@+id/conformarrival"
+                android:layout_width="@dimen/conformarrivalwidth"
+                android:layout_height="@dimen/conformarrivalgeight"
+                android:layout_alignParentRight="true"
+                android:layout_below="@id/dropoff"
+                android:layout_marginRight="@dimen/conformarrivalright"
+                android:layout_marginTop="@dimen/conformarrivaltop"
+                android:background="@drawable/a19"
+                android:enabled="true" />
+
+            <TextView
+                android:id="@+id/nouse"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_below="@id/conformarrival"
+                android:text="" />
+        </RelativeLayout>
+
+        <Button
+            android:id="@+id/pickedup"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/info1"
+            android:layout_marginLeft="@dimen/redboxrelativeleft"
+            android:layout_marginRight="@dimen/redboxrelativeright"
+            android:layout_marginTop="15dip"
+            android:background="@drawable/a20"
+            android:enabled="true" />
+
+        <Button
+            android:id="@+id/notshow"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/pickedup"
+            android:layout_centerInParent="true"
+            android:layout_marginLeft="@dimen/redboxrelativeleft"
+            android:layout_marginRight="@dimen/redboxrelativeright"
+            android:layout_marginTop="@dimen/notshowtop"
+            android:background="@drawable/a21"
+            android:enabled="true" />
+
+        <RelativeLayout
+            android:id="@+id/thridrelative"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="@dimen/bottomrelativebuttom"
+            android:layout_marginLeft="@dimen/redboxrelativeleft"
+            android:layout_marginRight="@dimen/redboxrelativeright" >
+
+            <Button
+                android:id="@+id/main"
+                android:layout_width="@dimen/mainwidth"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:background="@drawable/a28" />
+
+            <Button
+                android:id="@+id/next"
+                android:layout_width="@dimen/nextwidth"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:background="@drawable/a23" />
+        </RelativeLayout>
+    </RelativeLayout>
+
+</LinearLayout>

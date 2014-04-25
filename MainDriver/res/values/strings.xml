@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">BrumsTaxi</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="Driversjourneysdetail">Driversjourneysdetail</string>
+    <string name="action_settings">Settings</string>
+
+     <!-- Login Page -->
+    <string name="username">Username</string>
+    <string name="password">Password</string>
+    <string name="login">Login</string>
+    <string name="signup">Sign Up</string>
+    
+    
+    <string name="mjpick_up_from">Pick Up From:</string>
+     <string name="mjdrop_off_at">Drop Off at:</string>
+    
+    <string-array name="country_arrays">
+        <item>Malaysia</item>
+        <item>United States</item>
+        <item>Indonesia</item>
+        <item>France</item>
+        <item>Italy</item>
+        <item>Singapore</item>
+        <item>New Zealand</item>
+        <item>India</item>
+    </string-array>
+    
+</resources>
