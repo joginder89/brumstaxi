@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:whatever="http://schemas.android.com/apk/res-auto"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/bg"
+    android:weightSum="100"
+    android:id="@+id/relativemain1" >
+    
+    
+    <ImageView 
+         android:layout_width="match_parent"
+        android:layout_weight="4"
+        android:layout_height="0dip"
+        android:layout_marginLeft="@dimen/bookTaxiMarginLeft"
+                android:layout_marginRight="@dimen/bookTaxiMarginLeft"
+                android:background="@android:color/white"/>
+    <ImageView
+        android:id="@+id/register_header"
+        android:layout_width="match_parent"
+        android:layout_weight="10"
+        android:layout_height="0dip"
+       android:background="@drawable/a8"
+        />
+    <RelativeLayout 
+	    
+	    android:background="#FFFFFF"
+	  
+	    android:id="@+id/relativemain" 
+	    
+	     android:layout_width="match_parent"
+              android:layout_height="0dip"
+              android:orientation="vertical"
+              android:layout_weight="84"
+              
+             
+              android:layout_marginLeft="@dimen/bookTaxiMarginLeft"
+              android:layout_marginRight="@dimen/bookTaxiMarginLeft"
+	    >
+     
+         <ListView
+            android:id="@+id/listview_journeyblock"
+            android:layout_width="fill_parent"
+            android:layout_marginTop="@dimen/mjAboveHeaderGap"
+            android:layout_height="wrap_content" 
+            android:layout_above="@+id/homePageBtn"/>
+         
+         
+          <Button
+             
+        android:id="@+id/homePageBtn"
+        android:layout_width="fill_parent"
+        android:layout_height="@dimen/bookTaxiHeaderHeight"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/home_journy"
+        android:layout_marginTop="10dip"
+        android:layout_marginBottom="15dip"
+        android:layout_marginLeft="@dimen/bookTaxiMarginLeft"
+        android:layout_marginRight="@dimen/bookTaxiMarginLeft" />
+   </RelativeLayout>
+
+  
+   
+   
+</LinearLayout>

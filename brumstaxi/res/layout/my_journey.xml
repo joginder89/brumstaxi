@@ -44,7 +44,8 @@
             android:layout_width="fill_parent"
             android:layout_marginTop="@dimen/mjAboveHeaderGap"
             android:layout_height="wrap_content" 
-            android:layout_above="@+id/homePageBtn"/>
+            android:layout_above="@+id/homePageBtn"
+            android:layout_marginBottom="15dip"/>
          
          
           <Button
@@ -58,7 +59,8 @@
         android:layout_marginTop="10dip"
         android:layout_marginBottom="15dip"
         android:layout_marginLeft="@dimen/bookTaxiMarginLeft"
-        android:layout_marginRight="@dimen/bookTaxiMarginLeft" />
+        android:layout_marginRight="@dimen/bookTaxiMarginLeft"
+        android:visibility="gone" />
    </RelativeLayout>
 
   

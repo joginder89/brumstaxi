@@ -66,8 +66,7 @@ public class MyJourney extends Activity{
 			super.onPreExecute();
 			pDialog = new ProgressDialog(MyJourney.this);
 			pDialog.setMessage("Downloading Journey Data ....");
-			pDialog.setIndeterminate(false);
-			pDialog.setCancelable(true);
+			
 			pDialog.show();
 		}
 

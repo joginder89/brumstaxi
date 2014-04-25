@@ -44,6 +44,7 @@ public class Quote extends Activity {
 		
 	  	private ProgressDialog pDialog;
 	    JSONObject json;
+	    String mydata;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		Log.d("THREADTEST","MainThread=>"+Long.toString(Thread.currentThread().getId()));
@@ -51,12 +52,13 @@ public class Quote extends Activity {
 		setContentView(R.layout.quotes);
 		Initializer();
 		
-		String message = getIntent().getExtras().getString("message");
-		String mydata = getIntent().getExtras().getString("mydata");
-		
+		//String message = getIntent().getExtras().getString("message");
+		if(getIntent().getExtras().getString("mydata") != null) {
+			mydata = getIntent().getExtras().getString("mydata");
+		}
 		//Toast.makeText(getApplicationContext(),message,Toast.LENGTH_LONG).show();
 		//Toast.makeText(getApplicationContext(),mydata,Toast.LENGTH_LONG).show();
-		Log.d("ReceivedAtQuoteFile==>",message);
+		//Log.d("ReceivedAtQuoteFile==>",message);
 		
 		try {
 			json = new JSONObject(mydata);

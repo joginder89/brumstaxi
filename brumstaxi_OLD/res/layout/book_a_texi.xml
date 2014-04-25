@@ -1,0 +1,273 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout 
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:whatever="http://schemas.android.com/apk/res-auto"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/bg"
+    android:weightSum="100">
+    <ImageView
+        android:id="@+id/register_header"
+        android:layout_width="match_parent"
+        android:layout_weight="10"
+        android:layout_height="0dip"
+        android:layout_marginTop="20dip"
+        android:background="@drawable/a1"/>
+           
+          <LinearLayout
+              android:id="@+id/pageContent"
+              android:layout_width="match_parent"
+              android:layout_height="0dip"
+              android:orientation="vertical"
+              android:layout_weight="78"
+               android:layout_marginTop="15dip" 
+              android:weightSum="1">
+             <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dip"
+                android:layout_weight=".18"
+                android:background="@drawable/rounded_corner"
+               
+                android:layout_marginLeft="@dimen/bookTaxiMarginLeft"
+                android:layout_marginRight="@dimen/bookTaxiMarginLeft"
+                android:orientation="vertical" 
+                >
+                <TextView
+                    android:id="@+id/pickUpFromLabel"
+                    android:textColor="@color/blackColor"
+                    android:text="@string/pick_up_from"
+                    android:textSize="@dimen/bTaxiDateTimeTextSize"
+                    android:paddingLeft="@dimen/bTaxiPaddingLeft"
+                  
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    />
+                <AutoCompleteTextView
+                    android:id="@+id/pickUpFrom"
+                    android:textColor="@color/regTextField"
+                 
+                    android:textSize="15sp"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:background="#00000000"
+                    android:layout_marginLeft="@dimen/bTaxiPaddingLeft"
+                    android:gravity="top"
+                    android:layout_marginTop="5dip"
+                    />
+             </LinearLayout>
+             <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dip"
+                android:layout_weight=".18"
+                android:layout_marginLeft="@dimen/bookTaxiMarginLeft"
+                android:layout_marginRight="@dimen/bookTaxiMarginLeft"
+                android:background="@drawable/rounded_corner"
+                android:layout_marginTop="10dip"
+                android:orientation="vertical" >
+                <TextView
+                    android:id="@+id/dropOffToLabel"
+                    android:textColor="@color/blackColor"
+                    android:text="@string/drop_off_to"
+                    android:textSize="@dimen/bTaxiDateTimeTextSize"
+                    android:paddingLeft="@dimen/bTaxiPaddingLeft"
+                    android:paddingTop="@dimen/bTaxiPaddingLeft"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    />
+                <AutoCompleteTextView
+                    android:id="@+id/dropOffTo"
+                    android:textColor="@color/regTextField"
+                    
+                    android:textSize="15sp"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:background="#00000000"
+                    android:layout_marginLeft="@dimen/bTaxiPaddingLeft"
+                    android:gravity="top"
+                    android:layout_marginTop="5dip"/>
+         </LinearLayout>
+         <LinearLayout
+            android:layout_width="match_parent"
+             android:layout_height="0dip"
+                android:layout_weight=".20"
+           
+            android:layout_marginTop="10dip"
+            android:layout_marginLeft="@dimen/bookTaxiMarginLeft"
+            android:layout_marginRight="@dimen/bookTaxiMarginLeft"
+            android:baselineAligned="false" 
+            android:orientation="horizontal" >
+                <LinearLayout
+                        android:id="@+id/layoutSelectDate"
+                        android:layout_width="0dp"
+                        android:layout_height="fill_parent"
+                        android:layout_weight="24"
+                        android:layout_marginRight="12dip"
+                        android:background="@drawable/rounded_corner"
+                        android:orientation="vertical" >
+                        <Button
+                            android:id="@+id/buttonSelectDate"
+                            android:layout_width="fill_parent"
+                            android:layout_height="30dp"
+                            android:background="@android:color/transparent"
+                            android:text="@string/date"
+                            android:textColor="@color/blackColor"
+                            android:textSize="@dimen/bTaxiDateTimeTextSize" />
+                        
+                        <TextView
+                            android:id="@+id/bookTaxiDate"
+                            android:textColor="@color/regTextField"
+                            android:textSize="17sp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="fill_parent"
+                            android:gravity="center"
+                            android:layout_gravity="center"
+                            />
+                 </LinearLayout> 
+                 <LinearLayout
+                        android:id="@+id/layoutSelectTime"
+                        android:layout_width="0dp"
+                        android:layout_height="fill_parent"
+                        android:layout_weight="24"
+                        android:layout_marginRight="12dip"
+                        android:background="@drawable/rounded_corner"
+                        android:orientation="vertical" >
+                        <Button
+                            android:id="@+id/buttonSelectTime"
+                            android:layout_width="fill_parent"
+                            android:layout_height="30dp"
+                            android:background="@android:color/transparent"
+                            android:text="@string/time"
+                            android:textColor="@color/blackColor"
+                             android:textSize="@dimen/bTaxiDateTimeTextSize" />
+                        
+                        <TextView
+                            android:id="@+id/bookTaxiTime"
+                            android:textColor="@color/regTextField"
+                            android:textSize="17sp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="fill_parent"
+                            android:gravity="center"
+                            android:layout_gravity="center"
+                            />
+                 </LinearLayout>
+                 
+                 <LinearLayout
+                        android:layout_width="0dp"
+                        android:id="@+id/lauoutPassengers"
+                        android:layout_height="fill_parent"
+                        android:layout_weight="24"
+                        android:layout_marginRight="12dip"
+                        android:background="@drawable/rounded_corner"
+                        android:orientation="vertical" >
+                        <TextView
+                            android:id="@+id/bookTaxiPassengersLabel"
+                            android:textColor="@color/blackColor"
+                            android:text="@string/passengers"
+                            android:textSize="@dimen/bTaxiDateTimeTextSize"
+                            android:layout_gravity="center"
+                            android:gravity="center"
+                            android:layout_width="wrap_content"
+                            android:layout_height="30dp"
+                            />
+                        <TextView
+                            android:id="@+id/bookTaxiPassengers"
+                            android:layout_width="wrap_content"
+                            android:layout_gravity="center"
+                            android:textColor="@color/regTextField"
+                            android:textSize="17sp"
+                            android:gravity="center"
+                            android:layout_height="fill_parent" />
+                 </LinearLayout>
+                
+                 <LinearLayout
+                        android:id="@+id/layoutLuggage"
+                        android:layout_width="0dp"
+                        android:layout_height="fill_parent"
+                        android:layout_weight="24"
+                        android:background="@drawable/rounded_corner"
+                        android:orientation="vertical" >
+                        <TextView
+                            android:id="@+id/bookTaxiLuggageLabel"
+                            android:textColor="@color/blackColor"
+                            android:text="@string/luggage"
+                             android:textSize="@dimen/bTaxiDateTimeTextSize"
+                            android:layout_gravity="center"
+                            android:gravity="center"
+                            android:layout_width="wrap_content"
+                            android:layout_height="30dp"
+                            />
+                        <TextView
+                            android:id="@+id/bookTaxiLuggage"
+                            android:layout_gravity="center"
+                            android:textColor="@color/regTextField"
+                            android:textSize="17sp"
+                            android:gravity="center"
+                            android:layout_width="wrap_content"
+                            android:layout_height="fill_parent" />
+                 </LinearLayout>
+                 
+        </LinearLayout>
+       
+             <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dip"
+                android:layout_weight=".27"
+                android:background="@drawable/rounded_corner"
+                android:layout_marginLeft="@dimen/bookTaxiMarginLeft"
+                android:layout_marginRight="@dimen/bookTaxiMarginLeft"
+                android:layout_marginTop="10dip"
+                android:orientation="vertical" >
+                <TextView
+                    android:id="@+id/commentLabel"
+                    android:textColor="@color/blackColor"
+                    android:text="@string/comments"
+                    android:textSize="@dimen/bTaxiDateTimeTextSize"
+                    android:paddingLeft="@dimen/bTaxiPaddingLeft"
+                    android:paddingTop="@dimen/bTaxiPaddingLeft"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                 />
+                <com.andreabaccega.widget.FormEditText
+                   
+                    android:id="@+id/bookTaxiComment"
+                    android:textColor="@color/regTextField"
+                    
+                    android:textSize="15sp"
+                    android:layout_width="fill_parent"
+                    android:layout_height="@dimen/bTaxiCommentHeight"
+                    android:inputType="textMultiLine" 
+                    android:lines="5" 
+                    android:minLines="1" 
+                    android:gravity="top|left" 
+                    android:maxLines="7"
+                    android:scrollbars="vertical"
+                    android:background="#00000000"
+                    android:layout_marginLeft="@dimen/bTaxiPaddingLeft"
+                   
+                    android:layout_marginTop="5dip"
+                    />
+        </LinearLayout>
+        
+        <Button
+            android:id="@+id/getQuoteButton"
+            android:layout_width="fill_parent"
+            android:layout_height="0dip"
+            android:layout_weight=".13"
+            android:layout_marginTop="10dip"
+            android:background="@drawable/get_a_quote"
+            android:layout_marginLeft="@dimen/bookTaxiMarginLeft"
+            android:layout_marginRight="@dimen/bookTaxiMarginLeft"       
+            />  
+      </LinearLayout>
+     
+  <Button 
+      android:id="@+id/callUsButton"
+      
+      android:layout_height="0dip"
+      android:layout_width="match_parent"
+     android:layout_weight="12"
+android:layout_gravity="bottom"
+      android:background="@drawable/reg_call"
+      />       
+</LinearLayout>

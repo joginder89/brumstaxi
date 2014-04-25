@@ -58,8 +58,14 @@ public class GcmIntentService extends IntentService {
                 }
                 Log.i(TAG, "Completed work @ " + SystemClock.elapsedRealtime());
                 // Post notification of received message.
-                sendNotification(extras.toString(),extras.getString("mydata"));
-                Log.i(TAG, "Received: " + extras.getString("mydata"));
+                //Need to Review.
+                if(extras.getString("mydata") != null) {
+                	sendNotification(extras.toString(),extras.getString("mydata"));
+                	Log.i(TAG, "Received: " + extras.getString("mydata"));
+            	} else {
+            		driveratpickuppt(extras.getString("driveratpickuppoint"));
+                	Log.i(TAG, "Notification Received: " + extras.getString("driveratpickuppoint"));
+            	}
             }
         }
         // Release the wake lock provided by the WakefulBroadcastReceiver.
@@ -69,6 +75,30 @@ public class GcmIntentService extends IntentService {
     // Put the message into a notification and post it.
     // This is just one simple example of what you might choose to do with
     // a GCM message.
+    
+    
+    private void driveratpickuppt(String driveratpickuppoint) {
+        mNotificationManager = (NotificationManager)
+        this.getSystemService(Context.NOTIFICATION_SERVICE);
+        Log.e("InSideFunction2",driveratpickuppoint);
+        Intent myintent1 = new Intent(this, DriverAtPickupPoint.class);
+        myintent1.putExtra("driveratpickuppoint", driveratpickuppoint);
+        
+        PendingIntent contentIntent = PendingIntent.getActivity(this, 0,
+        		myintent1, PendingIntent.FLAG_UPDATE_CURRENT);
+
+        NotificationCompat.Builder mBuilder =
+                new NotificationCompat.Builder(this)
+        .setSmallIcon(R.drawable.ic_launcher)
+        .setContentTitle("Brums Taxi Notification")
+        .setStyle(new NotificationCompat.BigTextStyle()
+        .bigText("Driver Reached at Pickup Point"))
+        .setContentText("Driver Reached at Pickup Point");
+
+        mBuilder.setContentIntent(contentIntent);
+        mNotificationManager.notify(NOTIFICATION_ID, mBuilder.build());
+    }
+    
     private void sendNotification(String msg,String mydata) {
         mNotificationManager = (NotificationManager)
         this.getSystemService(Context.NOTIFICATION_SERVICE);

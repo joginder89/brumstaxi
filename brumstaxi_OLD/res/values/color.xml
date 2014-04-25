@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="whiteColor">#ffffff</color>
+    <color name="blackColor">#000000</color>
+    <color name="regTextField">#557699</color>
+    <color name="mainColor">#006cb5</color>
+    <color name="yellowColor">#d0bb50</color>
+     <color name="lightorange">#FFB180</color>
+      <color name="darckorange">#FF6600</color>
+      <color name="lightbalck">#4E4E4E</color>
+    
+</resources>

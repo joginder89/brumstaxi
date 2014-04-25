@@ -1,0 +1,16 @@
+<resources>
+	<!-- Book a Taxi  -->
+	
+    <dimen name="needTaxiSize">38sp</dimen>
+	<dimen name="tiredOfWaitingSize">22sp</dimen>
+	<dimen name="bookTaxiHeaderHeight">90dp</dimen>
+	<dimen name="bookTaxiDateTimeHeight">180dp</dimen>
+	<dimen name="bookTaxiElementSpace">30dp</dimen>
+	<dimen name="bookTaxiMarginLeft">24dp</dimen>
+	<dimen name="bTaxiPaddingLeft">12dp</dimen>
+	<dimen name="bTaxiPaddingTop">16dp</dimen>
+	<dimen name="bTaxiCommentHeight">48dp</dimen>
+	<dimen name="bTaxiDateTimeTextSize">18sp</dimen>
+	<dimen name="mjAboveHeaderGap">18dp</dimen>
+	<dimen name="mjRelTopGap">36dp</dimen>
+</resources>

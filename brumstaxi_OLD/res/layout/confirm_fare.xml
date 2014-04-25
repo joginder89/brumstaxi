@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout 
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:whatever="http://schemas.android.com/apk/res-auto"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/bg"
+    android:weightSum="100">
+    <ImageView 
+         android:layout_width="match_parent"
+        android:layout_weight="4"
+        android:layout_height="0dip"
+        android:layout_marginLeft="@dimen/bookTaxiMarginLeft"
+                android:layout_marginRight="@dimen/bookTaxiMarginLeft"
+                android:background="@android:color/white"/>
+    <ImageView
+        android:id="@+id/register_header"
+        android:layout_width="match_parent"
+        android:layout_weight="10"
+        android:layout_height="0dip"
+       
+        android:background="@drawable/a17"/>
+           
+          <RelativeLayout
+              android:id="@+id/pageContent"
+              android:layout_width="match_parent"
+              android:layout_height="0dip"
+              android:orientation="vertical"
+              android:layout_weight="84"
+              
+              android:weightSum="1"
+              android:background="@drawable/confirm_bg"
+              android:layout_marginLeft="@dimen/bookTaxiMarginLeft"
+              android:layout_marginRight="@dimen/bookTaxiMarginLeft">
+
+              <Button
+                  android:id="@+id/button1"
+                  android:layout_width="fill_parent"
+                  android:layout_height="wrap_content"
+                  android:layout_alignParentBottom="true"
+                  android:layout_centerHorizontal="true"
+                  android:layout_marginBottom="55dp"
+                  
+                  android:layout_marginLeft="36dip"
+                android:layout_marginRight="36dip"
+                android:background="@drawable/quote_button"/>
+
+              <TextView
+                  android:id="@+id/textView1"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:layout_alignParentTop="true"
+                  android:layout_centerHorizontal="true"
+                  android:layout_marginTop="36dp"
+                  android:textSize="40dip"
+                  android:textStyle="bold"
+                  android:text="@string/qt_con_fare"
+                  android:textColor="@color/mainColor" />
+              
+              <TextView
+                  android:id="@+id/textView2"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  
+                  android:layout_centerHorizontal="true"
+                  android:layout_marginTop="18dp"
+                  android:textSize="32dip"
+                  android:textStyle="bold"
+                  android:text="@string/qt_con_fare_you"
+                  android:textColor="@color/lightorange"
+                  android:layout_below="@+id/textView1" />
+              
+              <TextView
+                  android:id="@+id/textView_company"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:text="Anurag"
+                  android:layout_centerHorizontal="true"
+                  android:layout_marginTop="18dp"
+                  android:textSize="36dip"
+                  android:textStyle="bold"
+                  
+                  android:textColor="@color/lightbalck"
+                  android:layout_below="@+id/textView2" />
+              
+              <TextView
+                  android:id="@+id/textView_fair"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:text="Anurag"
+                  android:layout_centerHorizontal="true"
+                  android:layout_marginTop="18dp"
+                  android:textSize="48dip"
+                  android:textStyle="bold"
+                  
+                  android:textColor="@color/darckorange"
+                  android:layout_below="@+id/textView_company" />
+          
+      </RelativeLayout>
+</LinearLayout>
