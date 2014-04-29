@@ -12,14 +12,14 @@
         android:layout_weight="4"
         android:layout_height="0dip"
         android:layout_marginLeft="@dimen/bookTaxiMarginLeft"
-        android:layout_marginRight="@dimen/bookTaxiMarginLeft"
-        android:background="@android:color/white"/>
+                android:layout_marginRight="@dimen/bookTaxiMarginLeft"
+                android:background="@android:color/white"/>
     <ImageView
         android:id="@+id/register_header"
         android:layout_width="match_parent"
         android:layout_weight="10"
         android:layout_height="0dip"
-        android:background="@drawable/a9"/>
+        android:background="@drawable/a5"/>
            
           <RelativeLayout
               android:id="@+id/pageContent"
@@ -37,14 +37,30 @@
                   android:id="@+id/button1"
                   android:layout_width="fill_parent"
                   android:layout_height="wrap_content"
+                  android:layout_alignParentBottom="true"
                   android:layout_centerHorizontal="true"
                   android:layout_marginBottom="55dp"
                   android:orientation="vertical"
                   android:layout_marginLeft="25dip"
                 android:layout_marginRight="25dip"
-                 android:layout_alignParentBottom="true"
                 >
-                <TextView
+
+                  
+
+                  <TextView
+                      android:id="@+id/textView3"
+                      android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:text="Picking up:"
+                      android:textColor="@android:color/black" />
+                  <TextView
+                      android:id="@+id/textView_from"
+                      android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:textColor="@color/blackColor"
+                      android:text="TextView" />
+                  
+                  <TextView
                       android:id="@+id/textView"
                       android:layout_width="wrap_content"
                       android:layout_height="wrap_content"
@@ -55,30 +71,8 @@
                       android:id="@+id/textView_drop_at"
                       android:layout_width="wrap_content"
                       android:layout_height="wrap_content"
-                      android:text="TextView" 
-                      android:textColor="@android:color/black"/>
-
-              </LinearLayout>
-              
-              <LinearLayout
-                  android:id="@+id/button1"
-                  android:layout_width="fill_parent"
-                  android:layout_height="wrap_content"
-                  android:layout_centerHorizontal="true"
-                  android:layout_alignParentBottom="true"
-                  android:layout_marginBottom="55dp"
-                  android:orientation="horizontal"
-                  android:layout_marginLeft="25dip"
-                android:layout_marginRight="25dip"
-                >
-                <TextView
-                      android:id="@+id/textView"
-                      android:layout_width="wrap_content"
-                      android:layout_height="wrap_content"
-                      android:text="Rate:"
-                      android:textColor="@android:color/black"
-                      android:layout_marginTop="10dip" />
-                
+                      android:textColor="@color/blackColor"
+                      android:text="TextView" />
 
               </LinearLayout>
 
@@ -91,7 +85,7 @@
                   android:layout_marginTop="36dp"
                   android:textSize="40dip"
                   android:textStyle="bold"
-                  android:text="Hi James"
+                  android:text="@string/sy_seeyou_soon"
                   android:textColor="@color/mainColor" />
               
               <TextView
@@ -103,7 +97,7 @@
                   android:layout_marginTop="18dp"
                   android:textSize="28dip"
                   android:textStyle="bold"
-                  android:text="@string/waiting_outside"
+                  android:text="@string/sy_with_you"
                   android:textColor="@color/lightorange"
                   android:layout_below="@+id/textView1" />
               
@@ -111,11 +105,12 @@
                   android:id="@+id/textView_company"
                   android:layout_width="wrap_content"
                   android:layout_height="wrap_content"
-                  android:text="@string/taxiType"
+                  android:text="@string/sy_in_approx"
                   android:layout_centerHorizontal="true"
                   android:layout_marginTop="18dp"
                   android:textSize="28dip"
                   android:textStyle="bold"
+                  
                   android:textColor="@color/lightbalck"
                   android:layout_below="@+id/textView2" />
               
@@ -123,11 +118,13 @@
                   android:id="@+id/textView_fair"
                   android:layout_width="wrap_content"
                   android:layout_height="wrap_content"
-                  android:text="REG: W452 SJM"
+                  android:text="15 Mins"
                   android:layout_centerHorizontal="true"
+                  android:layout_marginTop="18dp"
+                  android:textSize="48dip"
                   android:textStyle="bold"
-                  android:background="@color/taxiNum"
-                  android:textColor="@color/blackColor"
+                  android:background="@drawable/amit"
+                  android:textColor="@color/whiteColor"
                   android:layout_below="@+id/textView_company" />
           
       </RelativeLayout>

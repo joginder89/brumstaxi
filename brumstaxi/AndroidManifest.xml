@@ -59,6 +59,7 @@
         <activity android:label="@string/app_name" android:name=".ConfirmFare" android:screenOrientation="portrait" ></activity>
         <activity android:label="@string/app_name" android:name=".MyJourney" android:screenOrientation="portrait" ></activity>
         <activity android:label="@string/app_name" android:name=".DriverAtPickupPoint" android:screenOrientation="portrait" ></activity>
+        <activity android:label="@string/app_name" android:name=".SeeYouSoon" android:screenOrientation="portrait" ></activity>
         <receiver
             android:name="com.anaadih.brumstaxi.GcmBroadcastReceiver"
             android:permission="com.google.android.c2dm.permission.SEND" >

@@ -5,16 +5,16 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.TextView;
 
-public class DriverAtPickupPoint extends Activity {
+public class SeeYouSoon extends Activity {
 	
 	String from;
 	String to;
 	
-	TextView textView_drop_at;
+	TextView textView_from,textView_drop_at;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.driver_atpickup_point);
+		setContentView(R.layout.see_you_soon);
 		Log.d("DriverAtPickupPoint","Call");
 		Initializer();
 		if(getIntent().getExtras().getString("from") != null) {
@@ -29,10 +29,12 @@ public class DriverAtPickupPoint extends Activity {
 			to = "Intent get Null";
 		}
 		Log.d("DriverAtPickupPoint==>",from+"=="+to);
+		textView_from.setText(from);
 		textView_drop_at.setText(to);
 	}
 	
 	public void Initializer() {
+		textView_from = (TextView) findViewById(R.id.textView_from);
 		textView_drop_at = (TextView) findViewById(R.id.textView_drop_at);
 	}
 }

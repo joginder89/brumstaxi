@@ -52,4 +52,11 @@
      <!-- My journey -->
      <string name="mjpick_up_from">Pick Up From:</string>
      <string name="mjdrop_off_at">Drop Off at:</string>
+     <!-- See you screen -->
+     <string name="sy_seeyou_soon">See you Soon</string>
+     <string name="sy_with_you">we will be with you</string>
+     <string name="sy_in_approx">In approximately</string>
+     <string name="waiting_outside">Im waiting outside</string>
+     <string name="taxiType">Black Mercedes</string>
+     
 </resources>

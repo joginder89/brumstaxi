@@ -1,7 +1,11 @@
 package com.anaadih.brumstaxi;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import com.anaadih.brumstaxi.R;
 import com.google.android.gms.gcm.GoogleCloudMessaging;
+
 import android.app.IntentService;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -17,6 +21,7 @@ public class GcmIntentService extends IntentService {
     private NotificationManager mNotificationManager;
     NotificationCompat.Builder builder;
     static final String TAG = "BrumsTaxi";
+    JSONObject jsonResult;
 
     public GcmIntentService() {
         super("GcmIntentService");
@@ -62,8 +67,8 @@ public class GcmIntentService extends IntentService {
                 if(extras.getString("mydata") != null) {
                 	sendNotification(extras.toString(),extras.getString("mydata"));
                 	Log.i(TAG, "Received: " + extras.getString("mydata"));
-            	} else {
-            		driveratpickuppt(extras.getString("driveratpickuppoint"));
+            	} else if(extras.getString("driverStatus") != null){
+            		driverStatus(extras.getString("driverStatus"));
                 	Log.i(TAG, "Notification Received: " + extras.getString("driveratpickuppoint"));
             	}
             }
@@ -77,26 +82,53 @@ public class GcmIntentService extends IntentService {
     // a GCM message.
     
     
-    private void driveratpickuppt(String driveratpickuppoint) {
+    private void driverStatus(String driverStatusData) {
         mNotificationManager = (NotificationManager)
         this.getSystemService(Context.NOTIFICATION_SERVICE);
-        Log.e("InSideFunction2",driveratpickuppoint);
-        Intent myintent1 = new Intent(this, DriverAtPickupPoint.class);
-        myintent1.putExtra("driveratpickuppoint", driveratpickuppoint);
+        Log.e("InSideFunction2",driverStatusData);
+        String status = null, from = null,to = null;
+        Intent myintent = null;
+        PendingIntent contentIntent = null;
         
-        PendingIntent contentIntent = PendingIntent.getActivity(this, 0,
-        		myintent1, PendingIntent.FLAG_UPDATE_CURRENT);
-
-        NotificationCompat.Builder mBuilder =
+        try {
+        	jsonResult = new JSONObject(driverStatusData);
+        	status = jsonResult.getString("status");
+        	from = jsonResult.getString("from");
+			to = jsonResult.getString("to");
+        } catch(JSONException e) {
+        	e.printStackTrace();
+        }
+        
+        
+		if(status != null && status.equals("3")) {
+			myintent = new Intent(this, SeeYouSoon.class);
+	        
+        } else if(status != null && status.equals("4")) {
+        	myintent = new Intent(this, DriverAtPickupPoint.class);
+        } else if(status != null && status.equals("5")) {
+        	myintent = new Intent(this, DriverAtPickupPoint.class);
+        }
+        
+		
+		if(myintent != null) {
+			myintent.putExtra("from", from);
+			myintent.putExtra("to", to);
+			contentIntent = PendingIntent.getActivity(this, 0,
+        		myintent, PendingIntent.FLAG_UPDATE_CURRENT);
+		}
+        
+		NotificationCompat.Builder mBuilder =
                 new NotificationCompat.Builder(this)
         .setSmallIcon(R.drawable.ic_launcher)
         .setContentTitle("Brums Taxi Notification")
         .setStyle(new NotificationCompat.BigTextStyle()
         .bigText("Driver Reached at Pickup Point"))
         .setContentText("Driver Reached at Pickup Point");
-
-        mBuilder.setContentIntent(contentIntent);
-        mNotificationManager.notify(NOTIFICATION_ID, mBuilder.build());
+        
+        if(contentIntent != null) {
+        	mBuilder.setContentIntent(contentIntent);
+        	mNotificationManager.notify(NOTIFICATION_ID, mBuilder.build());
+        }
     }
     
     private void sendNotification(String msg,String mydata) {

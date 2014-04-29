@@ -84,7 +84,6 @@ public class Driversjourneysdetail extends Activity implements OnClickListener {
 
 	@Override
 	public void onClick(View arg0) {
-		// TODO Auto-generated method stub
 
 		switch (arg0.getId()) {
 

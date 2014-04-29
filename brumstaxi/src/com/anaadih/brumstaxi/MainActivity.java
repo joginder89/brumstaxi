@@ -93,7 +93,6 @@ public class MainActivity extends Activity implements View.OnClickListener {
         //mDisplay.setTextColor(Color.YELLOW);
         context = getApplicationContext();
         
-
         // Check device for Play Services APK. If check succeeds, proceed with
         //  GCM registration.
         if (checkPlayServices()) {
@@ -108,6 +107,9 @@ public class MainActivity extends Activity implements View.OnClickListener {
             //mDisplay.append(msg1 + "\n");
             if (regid.isEmpty()) {
                 registerInBackground();
+            }
+            else {
+            	Log.d("DeviceAlreadyRegister",regid);
             }
             Initilizer();
             registrationButton.setOnClickListener(this);
@@ -297,7 +299,8 @@ public class MainActivity extends Activity implements View.OnClickListener {
 	                    gcm = GoogleCloudMessaging.getInstance(context);
 	                }	                
 		            regid = gcm.register(SENDER_ID);
-		            msg = "Device registered, registration ID=" + regid;
+		            msg = "Device registered Successfully, registration ID=" + regid;
+		            Log.e("GCMTesting",msg);
 		            sendRegistrationIdToBackend();
 		            storeRegistrationId(context, regid);
 	               

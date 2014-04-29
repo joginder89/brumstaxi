@@ -23,7 +23,7 @@ import android.util.Log;
 public class ServerRequest {
 	
 	public static String path = "http://hrm.testserver87.com/brumstaxidriver/";
-	//public static String path = "http://10.0.2.2/brumstaxidriver/";
+	//public static String path = "http://10.0.2.2/brumsTaxiDriverPhp/";
 
 	public static String pathgcm = path+"drivergcm.php";
 	public static String pathdriverdata =  path+"driverdata.php";
